@@ -29,28 +29,28 @@ from feishu_client import FeishuClient
 
 # 字段定义
 FIELDS = [
-    {"name": "日期", "type": 5, "property": {"dateFormatter": "yyyy/MM/dd", "timeFormatter": ""}},
+    {"name": "日期", "type": 5},
     {"name": "品类名", "type": 1},
     {"name": "二级团队", "type": 3, "property": {"options": [
-        {"name": "健康线", "color": 0},
-        {"name": "兴趣变美线", "color": 1}
+        {"name": "健康线", "color": 1},
+        {"name": "兴趣变美线", "color": 2}
     ]}},
     {"name": "三级团队", "type": 3, "property": {"options": [
-        {"name": "直播间购物车", "color": 0},
-        {"name": "直播间弹幕", "color": 1}
+        {"name": "直播间购物车", "color": 1},
+        {"name": "直播间弹幕", "color": 2}
     ]}},
     {"name": "会员等级", "type": 3, "property": {"options": [
-        {"name": "V0 观光客", "color": 0},
-        {"name": "V1 普通岛民", "color": 1},
-        {"name": "V2 新星岛民", "color": 2},
-        {"name": "V3 先驱岛民", "color": 3},
-        {"name": "V4 创新岛民", "color": 4},
-        {"name": "V5 领航岛民", "color": 5},
-        {"name": "V6 至尊岛民", "color": 6},
-        {"name": "V7 白银岛主", "color": 7},
-        {"name": "V8 白金岛主", "color": 8},
-        {"name": "V9 黄金岛主", "color": 9},
-        {"name": "V10 黑金岛主", "color": 10}
+        {"name": "V0 观光客", "color": 1},
+        {"name": "V1 普通岛民", "color": 2},
+        {"name": "V2 新星岛民", "color": 3},
+        {"name": "V3 先驱岛民", "color": 4},
+        {"name": "V4 创新岛民", "color": 5},
+        {"name": "V5 领航岛民", "color": 6},
+        {"name": "V6 至尊岛民", "color": 7},
+        {"name": "V7 白银岛主", "color": 8},
+        {"name": "V8 白金岛主", "color": 9},
+        {"name": "V9 黄金岛主", "color": 10},
+        {"name": "V10 黑金岛主", "color": 11}
     ]}},
     {"name": "线索数", "type": 2, "property": {"formatter": "0"}}
 ]
@@ -128,8 +128,14 @@ def main():
     print("\n📦 步骤3：添加字段 ...")
     for field in FIELDS:
         prop = field.get("property")
-        fid = client.create_field(app_token, table_id, field["name"], field["type"], prop)
-        print(f"   ✅ {field['name']} ({fid})")
+        try:
+            fid = client.create_field(app_token, table_id, field["name"], field["type"], prop)
+            print(f"   ✅ {field['name']} ({fid})")
+        except Exception as e:
+            print(f"   ❌ {field['name']} 创建失败: {e}")
+            import json
+            print(f"      请求体: {json.dumps({'field_name': field['name'], 'type': field['type'], 'property': prop}, ensure_ascii=False)}")
+            raise
 
     # 4. 读取并汇总Excel
     print("\n📦 步骤4：读取历史Excel并汇总 ...")

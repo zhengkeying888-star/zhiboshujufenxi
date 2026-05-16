@@ -44,7 +44,12 @@ class FeishuClient:
         headers = kwargs.pop("headers", {})
         headers.update(self._headers())
         resp = requests.request(method, url, headers=headers, **kwargs)
-        resp.raise_for_status()
+        if resp.status_code >= 400:
+            try:
+                err_body = resp.json()
+            except Exception:
+                err_body = resp.text
+            raise RuntimeError(f"飞书API错误 [{method} {path}] HTTP {resp.status_code}: {err_body}")
         result = resp.json()
         if result.get("code") != 0:
             raise RuntimeError(f"飞书API错误 [{path}]: {result}")

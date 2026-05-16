@@ -212,7 +212,7 @@ def generate_dashboard_html(data: dict, output_path: str) -> None:
     if os.path.exists(generate_script):
         print(f"🔄 正在调用 {generate_script} 生成看板 ...")
         import subprocess
-        result = subprocess.run([sys.executable, generate_script], capture_output=True, text=True)
+        result = subprocess.run([sys.executable, generate_script], capture_output=True, text=True, cwd=os.path.dirname(generate_script))
         if result.returncode == 0:
             print(f"✅ 看板已生成: {output_path}")
         else:
