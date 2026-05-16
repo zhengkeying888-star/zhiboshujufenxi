@@ -200,26 +200,29 @@ def write_to_feishu_doc(client: FeishuClient, document_id: str, content: str) ->
     for line in lines:
         if line.startswith("# "):
             doc_blocks.append({
-                "block_type": 1,
+                "block_type": 3,
                 "heading1": {"elements": [{"text_run": {"content": line[2:]}}]}
             })
         elif line.startswith("## "):
             doc_blocks.append({
-                "block_type": 2,
+                "block_type": 4,
                 "heading2": {"elements": [{"text_run": {"content": line[3:]}}]}
             })
         elif line.startswith("> "):
             doc_blocks.append({
-                "block_type": 4,
+                "block_type": 15,
                 "quote": {"elements": [{"text_run": {"content": line[2:]}}]}
             })
         elif line.startswith("---"):
-            doc_blocks.append({"block_type": 15, "divider": {}})
+            doc_blocks.append({
+                "block_type": 2,
+                "text": {"elements": [{"text_run": {"content": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"}}]}
+            })
         elif line.strip() == "":
             continue
         else:
             doc_blocks.append({
-                "block_type": 3,
+                "block_type": 2,
                 "text": {"elements": [{"text_run": {"content": line}}]}
             })
 
