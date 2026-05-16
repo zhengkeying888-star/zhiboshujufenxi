@@ -1,0 +1,93 @@
+name: 直播间线索看板自动更新
+
+on:
+  # 每周一早上 9:00 自动运行
+  schedule:
+    - cron: "0 1 * * 1"   # UTC 时间周一 1:00 = 北京时间周一 9:00
+  # 支持手动触发
+  workflow_dispatch:
+    inputs:
+      run_weekly_report:
+        description: "是否生成周报"
+        required: false
+        default: "true"
+      deploy_to_vercel:
+        description: "是否部署到 Vercel"
+        required: false
+        default: "false"
+
+jobs:
+  update-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 安装依赖
+        run: |
+          pip install pandas openpyxl requests
+
+      - name: 生成配置文件
+        run: |
+          cat > feishu_agent/config_local.py << 'EOF'
+          APP_ID = "${{ secrets.FEISHU_APP_ID }}"
+          APP_SECRET = "${{ secrets.FEISHU_APP_SECRET }}"
+          BITABLE_APP_TOKEN = "${{ secrets.BITABLE_APP_TOKEN }}"
+          BITABLE_TABLE_ID = "${{ secrets.BITABLE_TABLE_ID }}"
+          WEEKLY_DOC_ID = "${{ secrets.WEEKLY_DOC_ID }}"
+          FEISHU_CHAT_ID = "${{ secrets.FEISHU_CHAT_ID }}"
+          FEISHU_WEBHOOK_URL = "${{ secrets.FEISHU_WEBHOOK_URL }}"
+          HISTORY_EXCEL_FILES = ["3月直播间数据分析.xlsx", "4月直播间数据分析.xlsx", "5月直播间数据分析.xlsx"]
+          EXCEL_SHEET_NAME = "明细"
+          DASHBOARD_OUTPUT = "dashboard.html"
+          DASHBOARD_DATA_JSON = "dashboard_data.json"
+          EOF
+
+      - name: 同步数据并生成看板
+        run: |
+          cd feishu_agent
+          python sync_and_build.py
+
+      - name: 生成周报
+        if: ${{ github.event.inputs.run_weekly_report != 'false' }}
+        run: |
+          cd feishu_agent
+          python weekly_report.py
+
+      - name: 提交更新后的看板
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard.html dashboard_data.json feishu_agent/weekly_report_*.md
+          git diff --cached --quiet || git commit -m "auto: update dashboard & weekly report $(date +%Y-%m-%d)"
+          git push
+
+      - name: 部署到 Vercel
+        if: ${{ github.event.inputs.deploy_to_vercel == 'true' || github.event_name == 'schedule' }}
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+
+      - name: 飞书群通知
+        if: ${{ secrets.FEISHU_CHAT_ID != '' }}
+        run: |
+          cd feishu_agent
+          python -c "
+          from config_local import APP_ID, APP_SECRET, FEISHU_CHAT_ID
+          from feishu_client import FeishuClient
+          import datetime
+          client = FeishuClient(APP_ID, APP_SECRET)
+          title = f'📊 直播间看板已更新 ({datetime.date.today().strftime(\"%m-%d\")})'
+          content = '本周数据已同步，看板和周报均已生成。'
+          url = 'https://你的看板链接.vercel.app'  # 替换为实际链接
+          client.send_rich_message(FEISHU_CHAT_ID, title, content, url)
+          print('✅ 飞书通知已发送')
+          "
