@@ -131,566 +131,677 @@
 </header>
 
 <main class="max-w-container-max mx-auto px-margin py-margin space-y-8 pb-32">
-    <!-- KPIs -->
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+
+    <!-- ========== 核心归因结论 ========== -->
+    <section class="glass-card rounded-xl p-card-padding border-l-4 border-error">
+        <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined text-error text-3xl">crisis_alert</span>
+            <div class="flex-1">
+                <h2 class="text-title-main font-title-main text-error mb-2">核心归因结论</h2>
+                <p class="text-body-standard font-body-standard text-on-surface leading-relaxed">
+                    5月较4月同期购物车线索跌 <strong class="text-error">1,002</strong> 条（-53.8%）。
+                    <span class="text-error font-bold">头部品类塌方是主因</span>：暴跌品类贡献74.4%跌幅，
+                    
+                    <span class="text-primary font-bold">劳动节假期是主要影响因素</span>：假期日均线索较4月同期跌65.5%，但5月6日后平日日均已恢复至320条（与4月持平）。
+                    渠道端购物车和弹幕同比例下跌（-21.2% vs -15.6%），判断为<span class="text-primary font-bold">曝光端问题</span>，非直播间引导问题。
+                </p>
+                <div class="mt-4 bg-error-container/20 rounded-lg p-3">
+                    <div class="text-body-standard font-body-standard font-bold text-error mb-2">📉 暴跌品类明细（贡献74.4%跌幅）</div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        <div class="bg-white/60 rounded p-2"><div class="text-subtext font-subtext text-outline">气血【扶阳】</div><div class="text-body-standard font-body-standard font-bold text-error">49→3条 (-93.9%)</div></div>
+                    </div>
+                </div>
+                <div class="mt-3 bg-surface-container-low rounded-lg p-3">
+                    <div class="text-body-standard font-body-standard font-bold text-on-surface mb-1">🏥 健康线跌幅更大</div>
+                    <div class="text-body-standard font-body-standard text-on-surface">
+                        健康线 4月2,017条 → 5月1,388条（<strong class="text-error">-31.2%</strong>），
+                        兴趣变美线 4月2,712条 → 5月2,339条（<strong class="text-error">-13.8%</strong>）。
+                        健康线跌幅是变美线的 <strong>2.3</strong> 倍。
+                    </div>
+                </div>
+                <div class="mt-3 flex gap-4 text-subtext font-subtext">
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-error"></span> 购物车跌 -60.9</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary"></span> 弹幕跌 -54.8</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span> TOP5集中度 4月54.0% → 5月54.7%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== KPIs + 目标追踪 ========== -->
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
         <!-- Cart -->
         <div class="glass-card rounded-xl p-card-padding flex flex-col gap-4">
             <div class="flex items-center justify-between">
-                <h2 class="text-module-title font-module-title text-on-surface-variant">购物车线索 (Cart Leads)</h2>
-                <span class="material-symbols-outlined text-outline-variant" data-icon="shopping_cart">shopping_cart</span>
+                <h2 class="text-module-title font-module-title text-on-surface-variant">购物车线索</h2>
+                <span class="material-symbols-outlined text-outline-variant">shopping_cart</span>
             </div>
             <div class="flex items-end gap-4">
                 <div>
-                    <div class="text-metric-display font-metric-display text-error">3,727</div>
-                    <div class="text-subtext font-subtext text-on-surface-variant mt-1">5月 (May) · 截至15日</div>
+                    <div class="text-metric-display font-metric-display text-error">728</div>
+                    <div class="text-subtext font-subtext text-on-surface-variant mt-1">5月 (1-15日)</div>
                 </div>
                 <div class="flex items-center text-error bg-error-container px-2 py-1 rounded-md mb-1">
-                    <span class="material-symbols-outlined text-[16px] mr-1" data-icon="trending_down">trending_down</span>
-                    <span class="text-label-pill font-label-pill">-63.4%</span>
+                    <span class="material-symbols-outlined text-[16px] mr-1">trending_down</span>
+                    <span class="text-label-pill font-label-pill">-60.9%</span>
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest mt-2">
-                <div>
-                    <div class="text-body-standard font-body-standard text-on-surface">8,549</div>
-                    <div class="text-subtext font-subtext text-outline">3月 (Mar)</div>
-                </div>
-                <div>
-                    <div class="text-body-standard font-body-standard text-on-surface">10,193</div>
-                    <div class="text-subtext font-subtext text-outline">4月 (Apr)</div>
-                </div>
+                <div><div class="text-body-standard font-body-standard">1,595</div><div class="text-subtext text-outline">3月</div></div>
+                <div><div class="text-body-standard font-body-standard">1,864</div><div class="text-subtext text-outline">4月</div></div>
             </div>
         </div>
         <!-- Chat -->
         <div class="glass-card rounded-xl p-card-padding flex flex-col gap-4">
             <div class="flex items-center justify-between">
-                <h2 class="text-module-title font-module-title text-on-surface-variant">公屏弹幕线索 (Chat Leads)</h2>
-                <span class="material-symbols-outlined text-outline-variant" data-icon="chat_bubble">chat_bubble</span>
+                <h2 class="text-module-title font-module-title text-on-surface-variant">弹幕线索</h2>
+                <span class="material-symbols-outlined text-outline-variant">chat_bubble</span>
             </div>
             <div class="flex items-end gap-4">
                 <div>
-                    <div class="text-metric-display font-metric-display text-error">2,513</div>
-                    <div class="text-subtext font-subtext text-on-surface-variant mt-1">5月 (May) · 截至15日</div>
+                    <div class="text-metric-display font-metric-display text-error">600</div>
+                    <div class="text-subtext font-subtext text-on-surface-variant mt-1">5月 (1-15日)</div>
                 </div>
                 <div class="flex items-center text-error bg-error-container px-2 py-1 rounded-md mb-1">
-                    <span class="material-symbols-outlined text-[16px] mr-1" data-icon="trending_down">trending_down</span>
-                    <span class="text-label-pill font-label-pill">-55.8%</span>
+                    <span class="material-symbols-outlined text-[16px] mr-1">trending_down</span>
+                    <span class="text-label-pill font-label-pill">-54.8%</span>
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest mt-2">
-                <div>
-                    <div class="text-body-standard font-body-standard text-on-surface">5,560</div>
-                    <div class="text-subtext font-subtext text-outline">3月 (Mar)</div>
-                </div>
-                <div>
-                    <div class="text-body-standard font-body-standard text-on-surface">5,681</div>
-                    <div class="text-subtext font-subtext text-outline">4月 (Apr)</div>
-                </div>
+                <div><div class="text-body-standard font-body-standard">1,374</div><div class="text-subtext text-outline">3月</div></div>
+                <div><div class="text-body-standard font-body-standard">1,326</div><div class="text-subtext text-outline">4月</div></div>
             </div>
         </div>
-        <!-- Mix -->
-        <div class="glass-card rounded-xl p-card-padding flex flex-col gap-4">
+        <!-- Target Progress -->
+        <div class="glass-card rounded-xl p-card-padding flex flex-col gap-4 md:col-span-2">
             <div class="flex items-center justify-between">
-                <h2 class="text-module-title font-module-title text-on-surface-variant">业务线占比分布</h2>
-                <span class="material-symbols-outlined text-outline-variant" data-icon="pie_chart">pie_chart</span>
+                <h2 class="text-module-title font-module-title text-on-surface-variant">5月目标追踪</h2>
+                <span class="material-symbols-outlined text-outline-variant">track_changes</span>
             </div>
-            <div class="w-full h-32 flex-1" id="kpiRingChart"></div>
+            <div class="flex items-end gap-6">
+                <div>
+                    <div class="text-metric-display font-metric-display text-on-surface">39.2%</div>
+                    <div class="text-subtext font-subtext text-on-surface-variant mt-1">目标达成率 (728 / 9,500)</div>
+                </div>
+                <div class="flex-1 pb-2">
+                    <div class="w-full bg-surface-container-high rounded-full h-3">
+                        <div class="bg-[#f97316] h-3 rounded-full transition-all" style="width: 39.2%"></div>
+                    </div>
+                    <div class="flex justify-between text-subtext font-subtext mt-1">
+                        <span>缺口: 5,773</span>
+                        <span>日均: 248</span>
+                        <span>预测月底: 7,702 (81.1%)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-4 border-t border-surface-container-highest">
+                <div class="text-body-standard font-body-standard text-on-surface">
+                    预估流水 (按LTV¥95): <strong>¥731,734</strong> / 目标¥900,000
+                    <span class="text-subtext font-subtext text-outline ml-2">(预测达成 81.3%)</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Main Trend -->
-    <section class="glass-card rounded-xl p-card-padding">
-        <h2 class="text-module-title font-module-title text-on-surface mb-6">3-5月购物车线索日趋势对比</h2>
-        <div class="w-full h-[400px]" id="mainTrendChart"></div>
+    <!-- ========== 日趋势 + 假期效应 ========== -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+        <div class="lg:col-span-2 glass-card rounded-xl p-card-padding">
+            <h2 class="text-module-title font-module-title text-on-surface mb-6">3-5月购物车线索日趋势对比</h2>
+            <div class="w-full h-[400px]" id="mainTrendChart"></div>
+        </div>
+        <div class="glass-card rounded-xl p-card-padding">
+            <h2 class="text-module-title font-module-title text-on-surface mb-4">假期效应分析</h2>
+            <div class="w-full h-[200px]" id="holidayChart"></div>
+            <div class="mt-4 space-y-3">
+                <div class="flex justify-between items-center p-3 bg-surface-container-low rounded">
+                    <span class="text-body-standard font-body-standard">4月假期(1-5)日均</span>
+                    <span class="text-body-standard font-body-standard font-bold">307</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-error-container/30 rounded">
+                    <span class="text-body-standard font-body-standard text-error">5月假期(1-5)日均</span>
+                    <span class="text-body-standard font-body-standard font-bold text-error">106 (-65.5%)</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-surface-container-low rounded">
+                    <span class="text-body-standard font-body-standard">4月平日(6-15)日均</span>
+                    <span class="text-body-standard font-body-standard font-bold">319</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-secondary-container/30 rounded">
+                    <span class="text-body-standard font-body-standard text-secondary">5月平日(6-15)日均</span>
+                    <span class="text-body-standard font-body-standard font-bold text-secondary">320 (+0.1%)</span>
+                </div>
+            </div>
+            <p class="text-subtext font-subtext text-outline mt-4">
+                ⚠️ 假期是主要影响因素，假期后已恢复正常水平。
+            </p>
+        </div>
     </section>
 
-    <!-- Team + Level -->
+    <!-- ========== 渠道趋势 + 会员等级 ========== -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+        <div class="glass-card rounded-xl p-card-padding">
+            <h2 class="text-module-title font-module-title text-on-surface mb-4">渠道趋势对比 (购物车 vs 弹幕) <span class="text-subtext font-subtext text-outline font-normal">· 1-15号同期</span></h2>
+            <div class="w-full h-[250px]" id="channelChart"></div>
+            <div class="mt-4 p-3 bg-surface-container-low rounded">
+                <p class="text-body-standard font-body-standard text-on-surface">
+                    <span class="font-bold">结论：</span>曝光端问题
+                </p>
+                <div class="flex gap-4 mt-2 text-subtext font-subtext">
+                    <span>购物车环比: <strong class="text-error">-21.2%</strong></span>
+                    <span>弹幕环比: <strong class="text-error">-15.6%</strong></span>
+                </div>
+            </div>
+        </div>
+        <div class="glass-card rounded-xl p-card-padding">
+            <h2 class="text-module-title font-module-title text-on-surface mb-4">会员等级结构变化 <span class="text-subtext font-subtext text-outline font-normal">· 1-15号同期</span></h2>
+            <div class="w-full h-[250px]" id="memberLevelChart"></div>
+            <div class="mt-4 space-y-2 text-subtext font-subtext">
+                <div class="flex justify-between p-2 bg-surface-container-low rounded">
+                    <span>V7-V10 高价值用户</span>
+                    <span class="text-error font-bold">4月18.0% → 5月12.3% ↓</span>
+                </div>
+                <div class="flex justify-between p-2 bg-surface-container-low rounded">
+                    <span>V0-V1 新用户</span>
+                    <span class="text-error font-bold">4月52.3% → 5月59.9% ↑</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 团队对比 + 星期几 ========== -->
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
         <div class="glass-card rounded-xl p-card-padding">
             <h2 class="text-module-title font-module-title text-on-surface mb-6">同期对比 (1-15号) · 二级团队线索量</h2>
             <div class="w-full h-[300px]" id="teamBarChart"></div>
-            <p class="text-subtext font-subtext text-outline mt-4">
-                健康线同期波动剧烈：4月较3月+72%，5月较4月-31%；兴趣变美线相对稳定：5月较4月-14%
-            </p>
         </div>
         <div class="glass-card rounded-xl p-card-padding">
-            <h2 class="text-module-title font-module-title text-on-surface mb-6">线索用户等级结构变化</h2>
-            <div class="w-full h-[300px]" id="userLevelChart"></div>
+            <h2 class="text-module-title font-module-title text-on-surface mb-6">星期几线索分布</h2>
+            <div class="w-full h-[300px]" id="weekdayChart"></div>
         </div>
     </section>
 
-    <!-- Category Attribution -->
+    <!-- ========== 高价值品类 + 排期关联 ========== -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+        <div class="glass-card rounded-xl p-card-padding">
+            <h2 class="text-module-title font-module-title text-on-surface mb-4">高LTV高线索品类 (4月TOP10)</h2>
+            <p class="text-subtext font-subtext text-outline mb-4">线索≥50 & LTV≥80，按4月线索×LTV排序</p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b border-outline-variant">
+                            <th class="py-2 px-3 text-subtext font-subtext">品类</th>
+                            <th class="py-2 px-3 text-subtext font-subtext text-right">4月线索</th>
+                            <th class="py-2 px-3 text-subtext font-subtext text-right">4月LTV</th>
+                            <th class="py-2 px-3 text-subtext font-subtext">5月状态</th>
+                            <th class="py-2 px-3 text-subtext font-subtext text-right">5月线索</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">摄影美学</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">1,014</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">¥102.8</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard"></td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">541</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">健康食养</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">357</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">¥134.5</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard"></td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">226</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">道家睡眠</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">388</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">¥114.3</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard"><span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-label-pill">扛住</span></td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">458</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">气血【扶阳】</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">254</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">¥170.5</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard"><span class="px-2 py-0.5 rounded bg-error-container text-error text-label-pill">暴跌</span></td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">4</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">一杰瑜伽</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">501</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">¥81.2</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard"><span class="px-2 py-0.5 rounded bg-error-container text-error text-label-pill">暴跌</span></td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">144</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">君合太极</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">269</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">¥131.4</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard"><span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-label-pill">扛住</span></td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">225</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">逆龄女神瑜伽</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">259</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">¥132.8</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard"><span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-label-pill">扛住</span></td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">296</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">中医瑜伽</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">171</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">¥200.7</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard"><span class="px-2 py-0.5 rounded bg-error-container text-error text-label-pill">暴跌</span></td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">33</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">古法居家养生</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">294</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">¥116.4</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard"><span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-label-pill">扛住</span></td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">243</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">健康营养</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">250</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">¥116.7</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard"></td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">115</td>
+    </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="glass-card rounded-xl p-card-padding">
+            <h2 class="text-module-title font-module-title text-on-surface mb-4">未排期高线索品类 (需复播)</h2>
+            <p class="text-subtext font-subtext text-outline mb-4">4月线索≥20但5月未排期的品类</p>
+            <div class="space-y-2">
+                
+    <div class="flex items-center justify-between p-2 bg-error-container/30 rounded">
+        <span class="text-body-standard font-body-standard font-bold">风光摄影</span>
+        <span class="text-subtext font-subtext">4月59条 → 5月未排期</span>
+    </div>
+    
+    <div class="flex items-center justify-between p-2 bg-error-container/30 rounded">
+        <span class="text-body-standard font-body-standard font-bold">健康食养</span>
+        <span class="text-subtext font-subtext">4月58条 → 5月未排期</span>
+    </div>
+    
+    <div class="flex items-center justify-between p-2 bg-error-container/30 rounded">
+        <span class="text-body-standard font-body-standard font-bold">中医瑜伽</span>
+        <span class="text-subtext font-subtext">4月55条 → 5月未排期</span>
+    </div>
+    
+    <div class="flex items-center justify-between p-2 bg-error-container/30 rounded">
+        <span class="text-body-standard font-body-standard font-bold">气血调理</span>
+        <span class="text-subtext font-subtext">4月49条 → 5月未排期</span>
+    </div>
+    
+    <div class="flex items-center justify-between p-2 bg-error-container/30 rounded">
+        <span class="text-body-standard font-body-standard font-bold">唱歌</span>
+        <span class="text-subtext font-subtext">4月43条 → 5月未排期</span>
+    </div>
+    
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 线索变化瀑布图 ========== -->
+    <section class="glass-card rounded-xl p-card-padding">
+        <h2 class="text-module-title font-module-title text-on-surface mb-4">线索变化瀑布图 <span class="text-subtext font-subtext text-outline font-normal">· 4月(1-15)→5月(1-15)品类归因</span></h2>
+        <div class="w-full h-[450px]" id="waterfallChart"></div>
+        <div class="mt-4 p-3 bg-surface-container-low rounded">
+            <p class="text-body-standard font-body-standard text-on-surface">
+                <span class="font-bold">规律：</span>摄影美学、一杰瑜伽、气血【扶阳】三大品类合计减少 <strong class="text-error">1,080</strong> 条，占总跌幅的 <strong class="text-error">107.8%</strong>；风光摄影、短视频等增长品类抵消了部分跌幅。暴跌集中在前3个头部品类，非均匀下跌。
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== 品类归因卡片 ========== -->
     <section class="space-y-6">
-        <h2 class="text-title-main font-title-main text-on-surface">品类线索归因分析 <span class="text-subtext font-subtext text-outline font-normal">（1-15号同期对比）</span></h2>
+        <div class="flex items-center justify-between">
+            <h2 class="text-title-main font-title-main text-on-surface">品类线索归因分析 <span class="text-subtext font-subtext text-outline font-normal">（1-15号同期对比）</span></h2>
+            <div class="flex gap-3 text-subtext font-subtext">
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-error"></span> 暴跌/下滑</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-[#1e293b]"></span> 消失</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-secondary"></span> 扛住</span>
+            </div>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
             <div class="space-y-4">
-                <h3 class="text-module-title font-module-title text-primary border-b-2 border-primary-container pb-2 inline-block">健康线 (Health Line)</h3>
+                <h3 class="text-module-title font-module-title text-primary border-b-2 border-primary-container pb-2 inline-block">健康线</h3>
                 
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-error">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">君合太极</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-error-container text-error">
-                暴跌
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">道家睡眠</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-primary-fixed text-on-primary-fixed ml-2">健康线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
+                扛住
             </span>
         </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
         <div class="grid grid-cols-3 gap-2 text-center">
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">598</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">893</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
-            <div class="bg-error-container text-error p-2 rounded">
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
                 <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">225</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-error">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">健康食养</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-error-container text-error">
-                暴跌
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">294</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">844</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">226</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-error">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">健康营养</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-error-container text-error">
-                暴跌
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">498</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">530</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">115</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
             </div>
         </div>
     </div>
     
 
     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">道家睡眠</h4>
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">健康食养</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-primary-fixed text-on-primary-fixed ml-2">健康线</span>
+            </div>
             <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
                 扛住
             </span>
         </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
         <div class="grid grid-cols-3 gap-2 text-center">
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">602</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">470</div>
-            </div>
-            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">458</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#f97316]">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">古法居家养生</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#fff7ed] text-[#f97316]">
-                下滑
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">139</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">416</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">243</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-error">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">五禽戏</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-error-container text-error">
-                暴跌
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">723</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">331</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">91</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-error">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">气血【扶阳】</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-error-container text-error">
-                暴跌
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">106</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">265</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">4</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#f97316]">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">电子琴</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#fff7ed] text-[#f97316]">
-                下滑
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">109</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">69</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">26</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-outline-variant">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">太极：李在峰</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-surface-container text-on-surface-variant">
-                无数据
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">8</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">4月</div>
                 <div class="text-body-standard font-body-standard">0</div>
             </div>
-            <div class="bg-primary-fixed text-on-primary-fixed p-2 rounded">
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
                 <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-on-primary-fixed font-bold">0</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">健康营养</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-primary-fixed text-on-primary-fixed ml-2">健康线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
+                扛住
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#f97316]">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">五禽戏</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-primary-fixed text-on-primary-fixed ml-2">健康线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#fff7ed] text-[#f97316]">
+                下滑
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-error-container text-error p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-error font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-error">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">气血【扶阳】</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-primary-fixed text-on-primary-fixed ml-2">健康线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-error-container text-error">
+                暴跌
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-error-container text-error p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-error font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">古法居家养生</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-primary-fixed text-on-primary-fixed ml-2">健康线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
+                扛住
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">君合太极</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-primary-fixed text-on-primary-fixed ml-2">健康线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
+                扛住
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">电子琴</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-primary-fixed text-on-primary-fixed ml-2">健康线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
+                扛住
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
             </div>
         </div>
     </div>
     
             </div>
             <div class="space-y-4">
-                <h3 class="text-module-title font-module-title text-secondary border-b-2 border-secondary-container pb-2 inline-block">兴趣变美线 (Beauty Line)</h3>
+                <h3 class="text-module-title font-module-title text-secondary border-b-2 border-secondary-container pb-2 inline-block">兴趣变美线</h3>
                 
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#f97316]">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">摄影美学</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#fff7ed] text-[#f97316]">
-                下滑
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">摄影美学</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
+                扛住
             </span>
         </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
         <div class="grid grid-cols-3 gap-2 text-center">
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">959</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">1,663</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
-            <div class="bg-error-container text-error p-2 rounded">
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
                 <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">541</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-error">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">风光摄影</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-error-container text-error">
-                暴跌
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">1,008</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">1,530</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">432</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-error">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">一杰瑜伽</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-error-container text-error">
-                暴跌
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">506</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">903</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">144</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
             </div>
         </div>
     </div>
     
 
     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#f97316]">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">普拉提</h4>
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">一杰瑜伽</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
             <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#fff7ed] text-[#f97316]">
                 下滑
             </span>
         </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
         <div class="grid grid-cols-3 gap-2 text-center">
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">430</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">612</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-error-container text-error p-2 rounded">
                 <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">312</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#f97316]">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">逆龄女神瑜伽</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#fff7ed] text-[#f97316]">
-                下滑
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">673</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">424</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">296</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#f97316]">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">唱歌【燃老师】</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#fff7ed] text-[#f97316]">
-                下滑
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">474</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">366</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">255</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-error">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">相机摄影</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-error-container text-error">
-                暴跌
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">614</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">300</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">7</div>
+                <div class="text-body-standard font-body-standard text-error font-bold">0</div>
             </div>
         </div>
     </div>
     
 
     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">短视频-李扬</h4>
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">逆龄女神瑜伽</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
             <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
                 扛住
             </span>
         </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
         <div class="grid grid-cols-3 gap-2 text-center">
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">67</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">251</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
                 <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">297</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
             </div>
         </div>
     </div>
     
 
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-error">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">中医瑜伽-陈浙南</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-error-container text-error">
-                暴跌
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">风光摄影</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
+                扛住
             </span>
         </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">578</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">229</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">33</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-error">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">美学收纳</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-error-container text-error">
-                暴跌
-            </span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">5</div>
-            </div>
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">80</div>
-            </div>
-            <div class="bg-error-container text-error p-2 rounded">
-                <div class="text-subtext font-subtext">5月</div>
-                <div class="text-body-standard font-body-standard text-error font-bold">22</div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#1e293b]">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">手机摄影</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#1e293b] text-white">
-                消失
-            </span>
-        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
         <div class="grid grid-cols-3 gap-2 text-center">
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">3月</div>
@@ -698,7 +809,175 @@
             </div>
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">16</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#f97316]">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">中医瑜伽-陈浙南</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#fff7ed] text-[#f97316]">
+                下滑
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-error-container text-error p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-error font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">唱歌【燃老师】</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
+                扛住
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">普拉提</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
+                扛住
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">短视频-李扬</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
+                扛住
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#f97316]">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">相机摄影</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#fff7ed] text-[#f97316]">
+                下滑
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-error-container text-error p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-error font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#1e293b]">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">手机摄影</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#1e293b] text-white">
+                消失
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-surface-dim text-inverse-surface p-2 rounded">
                 <div class="text-subtext font-subtext">5月</div>
@@ -708,13 +987,17 @@
     </div>
     
 
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#1e293b]">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">瑜伽：杨淇</h4>
-            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#1e293b] text-white">
-                消失
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-secondary">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">美学收纳</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-secondary-container text-on-secondary-container">
+                扛住
             </span>
         </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
         <div class="grid grid-cols-3 gap-2 text-center">
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">3月</div>
@@ -722,7 +1005,35 @@
             </div>
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">4月</div>
-                <div class="text-body-standard font-body-standard">1</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-secondary-container text-on-secondary-container p-2 rounded">
+                <div class="text-subtext font-subtext">5月</div>
+                <div class="text-body-standard font-body-standard text-on-secondary-container font-bold">0</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-[#1e293b]">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">瑜伽：杨淇</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
+            <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-[#1e293b] text-white">
+                消失
+            </span>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">3月</div>
+                <div class="text-body-standard font-body-standard">0</div>
+            </div>
+            <div class="bg-surface-container-low p-2 rounded">
+                <div class="text-subtext font-subtext text-outline">4月</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-surface-dim text-inverse-surface p-2 rounded">
                 <div class="text-subtext font-subtext">5月</div>
@@ -733,16 +1044,20 @@
     
 
     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-outline-variant">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">中医变美</h4>
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">中医变美</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
             <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-surface-container text-on-surface-variant">
                 无数据
             </span>
         </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
         <div class="grid grid-cols-3 gap-2 text-center">
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">146</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">4月</div>
@@ -757,16 +1072,20 @@
     
 
     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-outline-variant">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">键盘乐</h4>
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">茶道-戎新宇</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
             <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-surface-container text-on-surface-variant">
                 无数据
             </span>
         </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
         <div class="grid grid-cols-3 gap-2 text-center">
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">10</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">4月</div>
@@ -781,16 +1100,20 @@
     
 
     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:bg-surface transition-colors cursor-default border-l-4 border-outline-variant">
-        <div class="flex justify-between items-start mb-3">
-            <h4 class="text-body-standard font-body-standard font-bold text-on-surface">茶道-戎新宇</h4>
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <h4 class="text-body-standard font-body-standard font-bold text-on-surface">键盘乐</h4>
+                <span class="px-1.5 py-0.5 rounded text-label-pill font-label-pill bg-secondary-container text-on-secondary-container ml-2">变美线</span>
+            </div>
             <span class="px-2 py-1 rounded text-label-pill font-label-pill flex items-center gap-1 bg-surface-container text-on-surface-variant">
                 无数据
             </span>
         </div>
+        <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥0</div>
         <div class="grid grid-cols-3 gap-2 text-center">
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">2</div>
+                <div class="text-body-standard font-body-standard">0</div>
             </div>
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">4月</div>
@@ -807,13 +1130,384 @@
         </div>
     </section>
 
-    <!-- Chat Trend -->
+    <!-- ========== 辅助决策建议 ========== -->
     <section class="glass-card rounded-xl p-card-padding">
-        <h2 class="text-module-title font-module-title text-on-surface mb-6">公屏弹幕线索趋势 (Chat Trend)</h2>
+        <div class="flex items-center gap-2 mb-4">
+            <span class="material-symbols-outlined text-secondary text-2xl">psychology</span>
+            <h2 class="text-module-title font-module-title text-on-surface">品类归因辅助决策建议</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- 转化问题 -->
+    <div class="bg-error-container/30 border border-error/20 rounded-xl p-4">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-error">trending_down</span>
+            <h3 class="text-module-title font-module-title text-error">转化问题（3个品类）</h3>
+        </div>
+        <div class="text-body-standard font-body-standard text-on-surface mb-2">
+            排期未减但单场线索暴跌，损失 <strong class="text-error">63</strong> 条
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-3">
+            4月排期 7 场 → 5月排期 7 场，线索/场次效率下降
+        </div>
+        <div class="bg-white/60 rounded p-3">
+            <div class="text-subtext font-subtext text-outline mb-1">决策建议</div>
+            <ul class="text-body-standard font-body-standard text-on-surface space-y-1 list-disc list-inside">
+                <li>排查直播间引导话术、商品吸引力</li>
+                <li>检查落地页转化链路是否异常</li>
+                <li>对比4月/5月单场直播录像找差异</li>
+            </ul>
+        </div>
+        <div class="mt-2 flex flex-wrap gap-1">
+            <span class="px-2 py-0.5 rounded bg-error-container text-error text-label-pill">摄影美学</span><span class="px-2 py-0.5 rounded bg-error-container text-error text-label-pill">五禽戏</span><span class="px-2 py-0.5 rounded bg-error-container text-error text-label-pill">健康营养</span>
+        </div>
+    </div>
+    <!-- 未排期 -->
+    <div class="bg-[#fff7ed] border border-[#f97316]/20 rounded-xl p-4">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-[#f97316]">event_busy</span>
+            <h3 class="text-module-title font-module-title text-[#f97316]">未排期（5个品类）</h3>
+        </div>
+        <div class="text-body-standard font-body-standard text-on-surface mb-2">
+            4月有排期但5月完全未排期，排期取消 <strong class="text-[#f97316]">9 场</strong>
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-3">
+            4月排期 9 场 → 5月排期 0 场，涉及 5 个品类
+        </div>
+        <div class="bg-white/60 rounded p-3">
+            <div class="text-subtext font-subtext text-outline mb-1">决策建议</div>
+            <ul class="text-body-standard font-body-standard text-on-surface space-y-1 list-disc list-inside">
+                <li>确认停播原因（品类调整/讲师问题/策略变化）</li>
+                <li>高LTV品类优先推动复播</li>
+                <li>制定复播优先级清单</li>
+            </ul>
+        </div>
+        <div class="mt-2 flex flex-wrap gap-1">
+            <span class="px-2 py-0.5 rounded bg-[#fff7ed] text-[#f97316] text-label-pill">气血调理</span><span class="px-2 py-0.5 rounded bg-[#fff7ed] text-[#f97316] text-label-pill">中医瑜伽</span><span class="px-2 py-0.5 rounded bg-[#fff7ed] text-[#f97316] text-label-pill">相机摄影</span><span class="px-2 py-0.5 rounded bg-[#fff7ed] text-[#f97316] text-label-pill">健康食养</span><span class="px-2 py-0.5 rounded bg-[#fff7ed] text-[#f97316] text-label-pill">风光摄影</span>
+        </div>
+    </div>
+    <!-- 场次减少 -->
+    <div class="bg-primary-fixed/50 border border-primary/20 rounded-xl p-4">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-primary">event_repeat</span>
+            <h3 class="text-module-title font-module-title text-primary">场次减少（2个品类）</h3>
+        </div>
+        <div class="text-body-standard font-body-standard text-on-surface mb-2">
+            排期场次减少 <strong class="text-primary">4 场</strong>，但单场效率反而提升
+        </div>
+        <div class="text-subtext font-subtext text-outline mb-3">
+            4月排期 10 场 → 5月排期 6 场，涉及 2 个品类
+        </div>
+        <div class="bg-white/60 rounded p-3">
+            <div class="text-subtext font-subtext text-outline mb-1">决策建议</div>
+            <ul class="text-body-standard font-body-standard text-on-surface space-y-1 list-disc list-inside">
+                <li>评估单场效率，若效率稳定则增加排期</li>
+                <li>优先恢复高转化品类的场次</li>
+                <li>检查是否因假期调休导致场次减少</li>
+            </ul>
+        </div>
+        <div class="mt-2 flex flex-wrap gap-1">
+            <span class="px-2 py-0.5 rounded bg-primary-fixed text-primary text-label-pill">一杰瑜伽</span><span class="px-2 py-0.5 rounded bg-primary-fixed text-primary text-label-pill">手机摄影</span>
+        </div>
+    </div>
+</div>
+<div class="mt-4 p-3 bg-secondary-container/30 rounded-lg border-l-4 border-secondary">
+    <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined text-secondary">lightbulb</span>
+        <div>
+            <div class="text-body-standard font-body-standard font-bold text-on-surface mb-1">综合决策优先级</div>
+            <div class="text-body-standard font-body-standard text-on-surface">
+                <strong>P0（立即行动）：</strong>未排期的高LTV品类（）推动复播，可快速回补线索缺口；
+                <strong>P1（本周内）：</strong>转化问题品类排查话术/链路，场次减少品类评估加场；
+                <strong>P2（持续监控）：</strong>低转化品类（≤1条/万曝光）优化商品和引导策略。
+            </div>
+        </div>
+    </div>
+</div>
+    </section>
+
+    <!-- ========== 排期差异分析 ========== -->
+    <section class="glass-card rounded-xl p-card-padding">
+        <div class="flex items-center gap-2 mb-4">
+            <span class="material-symbols-outlined text-primary text-2xl">event_note</span>
+            <h2 class="text-module-title font-module-title text-on-surface">排期差异分析 <span class="text-subtext font-subtext text-outline font-normal">· 4月(1-15)→5月(1-15) 同期对比 · 按暴跌原因分组</span></h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+    <div class="bg-surface-container-low rounded-lg p-3 text-center">
+        <div class="text-subtext font-subtext text-outline">4月总排期场次</div>
+        <div class="text-metric-display-mobile font-metric-display-mobile text-on-surface font-bold">56</div>
+    </div>
+    <div class="bg-surface-container-low rounded-lg p-3 text-center">
+        <div class="text-subtext font-subtext text-outline">5月总排期场次</div>
+        <div class="text-metric-display-mobile font-metric-display-mobile text-error font-bold">36</div>
+    </div>
+    <div class="bg-surface-container-low rounded-lg p-3 text-center">
+        <div class="text-subtext font-subtext text-outline">场次变化</div>
+        <div class="text-metric-display-mobile font-metric-display-mobile text-error font-bold">-20</div>
+    </div>
+    <div class="bg-surface-container-low rounded-lg p-3 text-center">
+        <div class="text-subtext font-subtext text-outline">5月总曝光</div>
+        <div class="text-metric-display-mobile font-metric-display-mobile text-on-surface font-bold">0</div>
+    </div>
+</div>
+<div class="overflow-x-auto">
+    <table class="w-full text-left">
+        <thead>
+            <tr class="border-b-2 border-outline-variant">
+                <th class="py-2 px-3 text-subtext font-subtext">暴跌原因</th>
+                <th class="py-2 px-3 text-subtext font-subtext text-right">品类数</th>
+                <th class="py-2 px-3 text-subtext font-subtext text-right">线索损失</th>
+                <th class="py-2 px-3 text-subtext font-subtext text-right">4月排期</th>
+                <th class="py-2 px-3 text-subtext font-subtext text-right">5月排期</th>
+                <th class="py-2 px-3 text-subtext font-subtext text-right">排期变化</th>
+                <th class="py-2 px-3 text-subtext font-subtext text-right">5月曝光</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="border-b border-outline-variant">
+                <td class="py-2 px-3 text-body-standard font-body-standard font-bold text-error">转化问题（每场暴跌）</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">3</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right text-error font-bold">63</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">7</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">7</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">+0</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+            </tr>
+            <tr class="border-b border-outline-variant">
+                <td class="py-2 px-3 text-body-standard font-body-standard font-bold text-[#f97316]">排期问题（未排期）</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">5</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right text-[#f97316] font-bold">107</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">9</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right text-error font-bold">-9</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+            </tr>
+            <tr class="border-b border-outline-variant">
+                <td class="py-2 px-3 text-body-standard font-body-standard font-bold text-primary">排期问题（场次减少）</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">2</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right text-primary font-bold">48</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">10</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">6</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right text-error font-bold">-4</td>
+                <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="mt-3 p-3 bg-surface-container-low rounded">
+    <p class="text-body-standard font-body-standard text-on-surface">
+        <span class="font-bold">排期差异结论：</span>4月→5月排期总场次 <strong>56 → 36</strong>（-20场）。
+        转化问题品类排期基本不变但效率暴跌，是线索下滑的<strong class="text-error">主因</strong>（损失63条）；
+        未排期品类完全停播，需优先推动复播；场次减少品类单场效率反而提升，可考虑加场恢复线索量。
+    </p>
+</div>
+    </section>
+
+    <!-- ========== 排期-线索关联明细 ========== -->
+    <section class="glass-card rounded-xl p-card-padding">
+        <h2 class="text-module-title font-module-title text-on-surface mb-4">排期-线索关联明细 (TOP15品类)</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="border-b-2 border-outline-variant">
+                        <th class="py-3 px-3 text-subtext font-subtext">品类</th>
+                        <th class="py-3 px-3 text-subtext font-subtext text-right">4月线索</th>
+                        <th class="py-3 px-3 text-subtext font-subtext text-right">5月线索</th>
+                        <th class="py-3 px-3 text-subtext font-subtext text-center">5月排期</th>
+                        <th class="py-3 px-3 text-subtext font-subtext text-right">5月曝光</th>
+                        <th class="py-3 px-3 text-subtext font-subtext text-right">线索/万曝光</th>
+                        <th class="py-3 px-3 text-subtext font-subtext">状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">摄影美学</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">93</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">69</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">是</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">🟢 正常</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">一杰瑜伽</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">85</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">45</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">是</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">🟢 正常</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">睡眠调理</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">62</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">63</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">是</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">🟢 正常</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">逆龄女神瑜伽</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">60</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">62</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">是</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">🟢 正常</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">风光摄影</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">59</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">54</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">否</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">⚪ 自然流量</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">健康食养</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">58</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">51</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">否</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">⚪ 自然流量</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">健康营养</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">57</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">42</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">是</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">🟢 正常</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">中医瑜伽</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">55</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">18</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">否</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">⚪ 自然流量</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">五禽戏</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">55</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">31</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">是</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">🟢 正常</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">气血调理</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">49</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">3</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">否</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">⚪ 自然流量</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">古法居家养生</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">47</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">54</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">是</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">🟢 正常</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">唱歌</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">43</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">42</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">是</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">⚪ 自然流量</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">普拉提</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">42</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">65</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">是</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">🟢 正常</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">君合太极</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">31</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">43</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">是</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">🟢 正常</td>
+    </tr>
+    
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard">短视频</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">30</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">47</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-center">是</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">0</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">🟢 正常</td>
+    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ========== 线索/万曝光分析 ========== -->
+    <section class="glass-card rounded-xl p-card-padding">
+        <h2 class="text-module-title font-module-title text-on-surface mb-4">线索/万曝光效率分析 <span class="text-subtext font-subtext text-outline font-normal">· 5月有曝光品类排序</span></h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="border-b-2 border-outline-variant">
+                        <th class="py-3 px-3 text-subtext font-subtext">品类</th>
+                        <th class="py-3 px-3 text-subtext font-subtext text-right">5月线索</th>
+                        <th class="py-3 px-3 text-subtext font-subtext text-right">5月曝光</th>
+                        <th class="py-3 px-3 text-subtext font-subtext text-right">线索/万曝光</th>
+                        <th class="py-3 px-3 text-subtext font-subtext">转化效率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-4 p-3 bg-surface-container-low rounded">
+            <p class="text-body-standard font-body-standard text-on-surface">
+                <span class="font-bold">结论：</span>高转化品类（≥3条/万曝光）为 <span class="text-secondary font-bold">摄影美学、唱歌</span>；低转化品类（≤1条/万曝光）需排查直播间引导话术或商品吸引力。
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== 弹幕趋势 ========== -->
+    <section class="glass-card rounded-xl p-card-padding">
+        <h2 class="text-module-title font-module-title text-on-surface mb-6">公屏弹幕线索趋势</h2>
         <div class="w-full h-[250px]" id="chatTrendChart"></div>
     </section>
 
-    <!-- Analysis -->
+    <!-- ========== 发现 + 复盘 ========== -->
     <section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
         <div class="lg:col-span-1 glass-card rounded-xl p-card-padding h-full">
             <h2 class="text-module-title font-module-title text-on-surface mb-4">数据发现 & 业务归因</h2>
@@ -821,57 +1515,7 @@
                 
     <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
         <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
-        <span class="text-body-standard font-body-standard text-on-surface">风光摄影 4月1530条→5月432条（跌幅-71.8%）</span>
-    </li>
-    
-    <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
-        <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
-        <span class="text-body-standard font-body-standard text-on-surface">一杰瑜伽 4月903条→5月144条（跌幅-84.1%）</span>
-    </li>
-    
-    <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
-        <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
-        <span class="text-body-standard font-body-standard text-on-surface">君合太极 4月893条→5月225条（跌幅-74.8%）</span>
-    </li>
-    
-    <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
-        <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
-        <span class="text-body-standard font-body-standard text-on-surface">健康食养 4月844条→5月226条（跌幅-73.2%）</span>
-    </li>
-    
-    <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
-        <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
-        <span class="text-body-standard font-body-standard text-on-surface">健康营养 4月530条→5月115条（跌幅-78.3%）</span>
-    </li>
-    
-    <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
-        <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
-        <span class="text-body-standard font-body-standard text-on-surface">五禽戏 4月331条→5月91条（跌幅-72.5%）</span>
-    </li>
-    
-    <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
-        <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
-        <span class="text-body-standard font-body-standard text-on-surface">相机摄影 4月300条→5月7条（跌幅-97.7%）</span>
-    </li>
-    
-    <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
-        <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
-        <span class="text-body-standard font-body-standard text-on-surface">气血【扶阳】 4月265条→5月4条（跌幅-98.5%）</span>
-    </li>
-    
-    <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
-        <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
-        <span class="text-body-standard font-body-standard text-on-surface">中医瑜伽-陈浙南 4月229条→5月33条（跌幅-85.6%）</span>
-    </li>
-    
-    <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
-        <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
-        <span class="text-body-standard font-body-standard text-on-surface">美学收纳 4月80条→5月22条（跌幅-72.5%）</span>
-    </li>
-    
-    <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
-        <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
-        <span class="text-body-standard font-body-standard text-on-surface">手机摄影 4月16条→5月直接消失（未排期）</span>
+        <span class="text-body-standard font-body-standard text-on-surface">手机摄影 4月8条→5月直接消失（未排期）</span>
     </li>
     
     <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
@@ -879,26 +1523,31 @@
         <span class="text-body-standard font-body-standard text-on-surface">瑜伽：杨淇 4月1条→5月直接消失（未排期）</span>
     </li>
     
+    <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-error">
+        <span class="material-symbols-outlined text-error mt-0.5" data-icon="warning">warning</span>
+        <span class="text-body-standard font-body-standard text-on-surface">气血【扶阳】 4月49条→5月3条（跌幅-93.9%）</span>
+    </li>
+    
     <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-[#f97316]">
         <span class="material-symbols-outlined text-[#f97316] mt-0.5" data-icon="error">error</span>
-        <span class="text-body-standard font-body-standard text-on-surface">健康线同期波动剧烈：4月较3月+72%，5月较4月-31.2%</span>
+        <span class="text-body-standard font-body-standard text-on-surface">健康线同期波动剧烈：4月较3月+27%，5月较4月-14.1%</span>
     </li>
     
     <li class="flex gap-3 items-start p-3 bg-surface-container-low rounded-lg border-l-4 border-secondary">
         <span class="material-symbols-outlined text-secondary mt-0.5" data-icon="check_circle">check_circle</span>
-        <span class="text-body-standard font-body-standard text-on-surface">兴趣变美线相对稳定：5月较4月-13.8%</span>
+        <span class="text-body-standard font-body-standard text-on-surface">兴趣变美线相对稳定：5月较4月-15.9%</span>
     </li>
     
             </ul>
         </div>
         <div class="lg:col-span-2 glass-card rounded-xl p-card-padding h-full flex flex-col gap-6">
             <div>
-                <label class="block text-body-standard font-body-standard font-bold text-on-surface mb-2">Root Cause Analysis (根因推演)</label>
-                <textarea class="w-full h-32 rounded-lg border-outline-variant bg-surface focus:border-primary focus:ring-2 focus:ring-primary-container/20 text-body-standard font-body-standard p-3 resize-none" placeholder="输入核心排查点... 例如：主播话术变更、投流模型调整、商品库下架等"></textarea>
+                <label class="block text-body-standard font-body-standard font-bold text-on-surface mb-2">根因推演</label>
+                <textarea class="w-full h-32 rounded-lg border-outline-variant bg-surface focus:border-primary focus:ring-2 focus:ring-primary-container/20 text-body-standard font-body-standard p-3 resize-none" placeholder="输入核心排查点..."></textarea>
             </div>
             <div>
-                <label class="block text-body-standard font-body-standard font-bold text-on-surface mb-2">Action Plan (调整策略)</label>
-                <textarea class="w-full h-32 rounded-lg border-outline-variant bg-surface focus:border-primary focus:ring-2 focus:ring-primary-container/20 text-body-standard font-body-standard p-3 resize-none" placeholder="输入下一步计划... 例如：恢复4月高转化话术切片，重启大健康特定产品投流等"></textarea>
+                <label class="block text-body-standard font-body-standard font-bold text-on-surface mb-2">调整策略</label>
+                <textarea class="w-full h-32 rounded-lg border-outline-variant bg-surface focus:border-primary focus:ring-2 focus:ring-primary-container/20 text-body-standard font-body-standard p-3 resize-none" placeholder="输入下一步计划..."></textarea>
             </div>
             <div class="flex justify-end gap-3 mt-auto">
                 <button class="px-4 py-2 rounded-lg border border-outline-variant text-on-surface text-body-standard font-body-standard font-bold hover:bg-surface-container-high transition-colors">保存草稿</button>
@@ -909,7 +1558,7 @@
 </main>
 
 <script>
-    const chartsData = {"daily_cart": {"3月": {"1": 85, "2": 33, "3": 232, "4": 200, "5": 875, "6": 247, "7": 50, "8": 37, "9": 36, "10": 301, "11": 225, "12": 384, "13": 323, "14": 163, "15": 67, "16": 308, "17": 285, "18": 282, "19": 512, "20": 386, "21": 368, "22": 254, "23": 197, "24": 409, "25": 514, "26": 462, "27": 382, "28": 149, "29": 123, "30": 419, "31": 241}, "4月": {"1": 249, "2": 637, "3": 488, "4": 93, "5": 68, "6": 97, "7": 290, "8": 358, "9": 615, "10": 276, "11": 136, "12": 124, "13": 384, "14": 539, "15": 375, "16": 455, "17": 1280, "18": 294, "19": 169, "20": 249, "21": 397, "22": 307, "23": 456, "24": 381, "25": 142, "26": 171, "27": 245, "28": 258, "29": 232, "30": 428, "31": 0}, "5月": {"1": 151, "2": 39, "3": 142, "4": 128, "5": 69, "6": 154, "7": 476, "8": 620, "9": 325, "10": 139, "11": 269, "12": 204, "13": 436, "14": 450, "15": 125, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0, "24": 0, "25": 0, "26": 0, "27": 0, "28": 0, "29": 0, "30": 0, "31": 0}}, "daily_dm": {"3月": {"1": 105, "2": 73, "3": 108, "4": 85, "5": 148, "6": 183, "7": 130, "8": 109, "9": 81, "10": 145, "11": 173, "12": 231, "13": 369, "14": 243, "15": 142, "16": 151, "17": 208, "18": 190, "19": 159, "20": 319, "21": 199, "22": 270, "23": 196, "24": 131, "25": 81, "26": 102, "27": 379, "28": 241, "29": 151, "30": 286, "31": 172}, "4月": {"1": 111, "2": 142, "3": 400, "4": 172, "5": 253, "6": 177, "7": 112, "8": 150, "9": 107, "10": 453, "11": 223, "12": 163, "13": 227, "14": 169, "15": 118, "16": 123, "17": 408, "18": 193, "19": 133, "20": 260, "21": 189, "22": 96, "23": 105, "24": 316, "25": 172, "26": 108, "27": 151, "28": 177, "29": 133, "30": 140, "31": 0}, "5月": {"1": 287, "2": 121, "3": 158, "4": 127, "5": 93, "6": 168, "7": 102, "8": 410, "9": 234, "10": 95, "11": 195, "12": 184, "13": 121, "14": 164, "15": 54, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0, "24": 0, "25": 0, "26": 0, "27": 0, "28": 0, "29": 0, "30": 0, "31": 0}}, "team_compare": {"3月": {"健康线": 1171, "兴趣变美线": 2087}, "4月": {"健康线": 2017, "兴趣变美线": 2712}, "5月": {"健康线": 1388, "兴趣变美线": 2339}}, "level_data": {"3月": {"V1 普通岛民": 3398, "V2 新星岛民": 817, "V0 观光客": 654, "V10 黑金岛主": 295, "V8 白金岛主": 415, "V5 领航岛民": 486, "V6 至尊岛民": 541, "V9 黄金岛主": 1073, "V3 先驱岛民": 466, "V4 创新岛民": 136, "V7 白银岛主": 268}, "4月": {"V0 观光客": 842, "V1 普通岛民": 4253, "V5 领航岛民": 567, "V6 至尊岛民": 633, "V7 白银岛主": 272, "V10 黑金岛主": 314, "V2 新星岛民": 1016, "V3 先驱岛民": 666, "V8 白金岛主": 414, "V9 黄金岛主": 1006, "V4 创新岛民": 210}, "5月": {"V1 普通岛民": 1739, "V5 领航岛民": 179, "V2 新星岛民": 401, "V3 先驱岛民": 225, "V6 至尊岛民": 168, "V9 黄金岛主": 263, "V0 观光客": 415, "V4 创新岛民": 60, "V7 白银岛主": 65, "V8 白金岛主": 132, "V10 黑金岛主": 80}}, "all_levels": ["V0 观光客", "V1 普通岛民", "V10 黑金岛主", "V2 新星岛民", "V3 先驱岛民", "V4 创新岛民", "V5 领航岛民", "V6 至尊岛民", "V7 白银岛主", "V8 白金岛主", "V9 黄金岛主"], "health_pct": 37.2, "interest_pct": 62.8};
+    const chartsData = {"daily_cart": {"3月": {"1": 38, "2": 25, "3": 32, "4": 49, "5": 58, "6": 61, "7": 31, "8": 26, "9": 26, "10": 53, "11": 48, "12": 81, "13": 63, "14": 61, "15": 34, "16": 47, "17": 48, "18": 58, "19": 82, "20": 55, "21": 58, "22": 44, "23": 39, "24": 53, "25": 53, "26": 81, "27": 70, "28": 58, "29": 47, "30": 57, "31": 59}, "4月": {"1": 54, "2": 75, "3": 86, "4": 46, "5": 39, "6": 33, "7": 52, "8": 51, "9": 80, "10": 67, "11": 44, "12": 41, "13": 56, "14": 61, "15": 73, "16": 72, "17": 70, "18": 75, "19": 59, "20": 60, "21": 59, "22": 91, "23": 80, "24": 77, "25": 58, "26": 48, "27": 49, "28": 55, "29": 68, "30": 85, "31": 0}, "5月": {"1": 51, "2": 34, "3": 48, "4": 38, "5": 33, "6": 43, "7": 73, "8": 73, "9": 68, "10": 39, "11": 35, "12": 47, "13": 44, "14": 76, "15": 26, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0, "24": 0, "25": 0, "26": 0, "27": 0, "28": 0, "29": 0, "30": 0, "31": 0}}, "daily_dm": {"3月": {"1": 33, "2": 30, "3": 32, "4": 35, "5": 29, "6": 38, "7": 33, "8": 32, "9": 27, "10": 45, "11": 41, "12": 59, "13": 69, "14": 55, "15": 55, "16": 38, "17": 56, "18": 60, "19": 46, "20": 57, "21": 45, "22": 49, "23": 45, "24": 41, "25": 33, "26": 43, "27": 55, "28": 55, "29": 46, "30": 52, "31": 40}, "4月": {"1": 31, "2": 33, "3": 74, "4": 45, "5": 55, "6": 47, "7": 35, "8": 33, "9": 36, "10": 66, "11": 48, "12": 47, "13": 46, "14": 50, "15": 32, "16": 30, "17": 66, "18": 46, "19": 43, "20": 41, "21": 36, "22": 40, "23": 33, "24": 68, "25": 45, "26": 42, "27": 40, "28": 37, "29": 41, "30": 40, "31": 0}, "5月": {"1": 61, "2": 42, "3": 46, "4": 44, "5": 31, "6": 30, "7": 31, "8": 60, "9": 55, "10": 35, "11": 35, "12": 34, "13": 34, "14": 39, "15": 23, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0, "24": 0, "25": 0, "26": 0, "27": 0, "28": 0, "29": 0, "30": 0, "31": 0}}, "team_compare": {"3月": {"兴趣变美线": 401, "健康线": 285}, "4月": {"兴趣变美线": 497, "健康线": 361}, "5月": {"兴趣变美线": 418, "健康线": 310}}, "level_data": {"3月": {"V1 普通岛民": 324, "V2 新星岛民": 205, "V0 观光客": 174, "V10 黑金岛主": 75, "V8 白金岛主": 122, "V5 领航岛民": 131, "V6 至尊岛民": 129, "V9 黄金岛主": 155, "V3 先驱岛民": 117, "V4 创新岛民": 70, "V7 白银岛主": 93}, "4月": {"V0 观光客": 204, "V1 普通岛民": 335, "V5 领航岛民": 149, "V6 至尊岛民": 168, "V7 白银岛主": 89, "V10 黑金岛主": 95, "V2 新星岛民": 231, "V3 先驱岛民": 171, "V8 白金岛主": 134, "V9 黄金岛主": 199, "V4 创新岛民": 89}, "5月": {"V1 普通岛民": 162, "V5 领航岛民": 66, "V2 新星岛民": 100, "V3 先驱岛民": 74, "V6 至尊岛民": 48, "V9 黄金岛主": 64, "V0 观光客": 83, "V4 创新岛民": 34, "V7 白银岛主": 27, "V8 白金岛主": 39, "V10 黑金岛主": 31}}, "all_levels": ["V0 观光客", "V1 普通岛民", "V10 黑金岛主", "V2 新星岛民", "V3 先驱岛民", "V4 创新岛民", "V5 领航岛民", "V6 至尊岛民", "V7 白银岛主", "V8 白金岛主", "V9 黄金岛主"], "health_pct": 42.6, "interest_pct": 57.4, "member_levels": {"3月": {"total": 3258, "groups": {"V0-V1 新用户": 1474, "V2-V6 普通会员": 1067, "V7-V10 高价值": 717}, "pct": {"V0-V1 新用户": 45.2, "V2-V6 普通会员": 32.8, "V7-V10 高价值": 22.0}}, "4月": {"total": 4729, "groups": {"V0-V1 新用户": 2473, "V2-V6 普通会员": 1406, "V7-V10 高价值": 850}, "pct": {"V0-V1 新用户": 52.3, "V2-V6 普通会员": 29.7, "V7-V10 高价值": 18.0}}, "5月": {"total": 3727, "groups": {"V0-V1 新用户": 2234, "V2-V6 普通会员": 1033, "V7-V10 高价值": 460}, "pct": {"V0-V1 新用户": 59.9, "V2-V6 普通会员": 27.7, "V7-V10 高价值": 12.3}}}, "channel_trends": {"monthly": {"3月": {"购物车": 3258, "弹幕": 2325, "total": 5583}, "4月": {"购物车": 4729, "弹幕": 2977, "total": 7706}, "5月": {"购物车": 3727, "弹幕": 2513, "total": 6240}}, "cart_change": -21.2, "dm_change": -15.6, "same_trend": true, "conclusion": "曝光端问题"}, "holiday_effect": {"counts": {"4月假期(1-5)": 1535, "4月平日(6-15)": 3194, "5月假期(1-5)": 529, "5月平日(6-15)": 3198}, "holiday_drop": -65.5, "normal_drop": 0.1, "holiday_is_main_factor": true}, "weekday_pattern": {"3月": {"周一": 69, "周二": 533, "周三": 425, "周四": 1259, "周五": 570, "周六": 213, "周日": 189}, "4月": {"周一": 481, "周二": 829, "周三": 982, "周四": 1252, "周五": 764, "周六": 229, "周日": 192}, "5月": {"周一": 397, "周二": 273, "周三": 590, "周四": 926, "周五": 896, "周六": 364, "周日": 281}}, "pareto": {"4月": {"top5_sum": 2554, "total": 4729, "集中度": 54.0}, "5月": {"top5_sum": 2040, "total": 3727, "集中度": 54.7}}, "waterfall": [{"name": "4月总线索", "value": 1864, "type": "start"}, {"name": "气血【扶阳】", "value": -46, "type": "decrease"}, {"name": "一杰瑜伽", "value": -40, "type": "decrease"}, {"name": "中医瑜伽-陈浙南", "value": -37, "type": "decrease"}, {"name": "摄影美学", "value": -24, "type": "decrease"}, {"name": "五禽戏", "value": -24, "type": "decrease"}, {"name": "普拉提", "value": 23, "type": "increase"}, {"name": "电子琴", "value": 21, "type": "increase"}, {"name": "短视频-李扬", "value": 17, "type": "increase"}, {"name": "健康营养", "value": -15, "type": "decrease"}, {"name": "君合太极", "value": 12, "type": "increase"}, {"name": "相机摄影", "value": -12, "type": "decrease"}, {"name": "手机摄影", "value": -8, "type": "decrease"}, {"name": "其他减少", "value": -14, "type": "decrease"}, {"name": "其他增长", "value": 17, "type": "increase"}, {"name": "5月总线索", "value": 728, "type": "end"}]};
 
     document.addEventListener('DOMContentLoaded', function() {
         const colors = {
@@ -923,40 +1572,7 @@
             grayMarch: '#94a3b8'
         };
 
-        // 1. KPI Ring Chart
-        const kpiRingChart = echarts.init(document.getElementById('kpiRingChart'));
-        kpiRingChart.setOption({
-            tooltip: { trigger: 'item' },
-            color: [colors.primary, colors.secondary],
-            series: [
-                {
-                    type: 'pie',
-                    radius: ['60%', '90%'],
-                    avoidLabelOverlap: false,
-                    label: {
-                        show: true,
-                        position: 'center',
-                        formatter: function(p) {
-                            return p.name.includes('Health')
-                                ? '健康线\n' + p.percent + '%'
-                                : '兴趣变美线\n' + p.percent + '%';
-                        },
-                        fontSize: 13,
-                        fontWeight: 'bold',
-                        color: function(p) {
-                            return p.name.includes('Health') ? colors.primary : colors.secondary;
-                        }
-                    },
-                    labelLine: { show: false },
-                    data: [
-                        { value: chartsData.health_pct, name: '健康线 (Health)' },
-                        { value: chartsData.interest_pct, name: '兴趣变美线 (Beauty)' }
-                    ]
-                }
-            ]
-        });
-
-        // 2. Main Trend Chart
+        // 1. Main Trend Chart
         const mainTrendChart = echarts.init(document.getElementById('mainTrendChart'));
         const days = Array.from({length: 31}, (_, i) => `${i+1}日`);
         const marData = Object.values(chartsData.daily_cart['3月']);
@@ -965,19 +1581,19 @@
 
         mainTrendChart.setOption({
             tooltip: { trigger: 'axis', backgroundColor: '#fff', textStyle: { color: '#191c1e' }, extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);' },
-            legend: { data: ['3月 (Mar)', '4月 (Apr)', '5月 (May)'], bottom: 0 },
+            legend: { data: ['3月', '4月', '5月'], bottom: 0 },
             grid: { left: '3%', right: '4%', bottom: '10%', top: '5%', containLabel: true },
             xAxis: { type: 'category', boundaryGap: false, data: days, axisLine: { lineStyle: { color: colors.outline } } },
             yAxis: { type: 'value', splitLine: { lineStyle: { color: colors.surfaceContainerLow } } },
             series: [
                 {
-                    name: '3月 (Mar)', type: 'line', data: marData,
+                    name: '3月', type: 'line', data: marData,
                     itemStyle: { color: colors.grayMarch },
                     lineStyle: { type: 'dashed', width: 2 },
                     symbol: 'none'
                 },
                 {
-                    name: '4月 (Apr)', type: 'line', data: aprData,
+                    name: '4月', type: 'line', data: aprData,
                     itemStyle: { color: colors.primaryContainer },
                     lineStyle: { width: 2 },
                     areaStyle: {
@@ -989,7 +1605,7 @@
                     symbol: 'none'
                 },
                 {
-                    name: '5月 (May)', type: 'line', data: mayData,
+                    name: '5月', type: 'line', data: mayData,
                     itemStyle: { color: colors.error },
                     lineStyle: { width: 2 },
                     areaStyle: {
@@ -998,13 +1614,74 @@
                             { offset: 1, color: 'rgba(186, 26, 26, 0.0)' }
                         ])
                     },
+                    markArea: {
+                        silent: true,
+                        data: [[
+                            { xAxis: '1日', itemStyle: { color: 'rgba(186,26,26,0.05)' } },
+                            { xAxis: '5日', itemStyle: { color: 'rgba(186,26,26,0.05)' } }
+                        ]]
+                    },
                     symbol: 'circle',
                     symbolSize: 6
                 }
             ]
         });
 
-        // 3. Team Bar Chart
+        // 2. Holiday Chart
+        const holidayChart = echarts.init(document.getElementById('holidayChart'));
+        const he = chartsData.holiday_effect;
+        holidayChart.setOption({
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+            legend: { bottom: 0 },
+            grid: { left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true },
+            xAxis: { type: 'category', data: ['假期日均(1-5)', '平日日均(6-15)'], axisLine: { lineStyle: { color: colors.outline } } },
+            yAxis: { type: 'value', splitLine: { lineStyle: { color: colors.surfaceContainerLow } } },
+            color: [colors.primaryContainer, colors.error],
+            series: [
+                { name: '4月', type: 'bar', data: [307, 319], barWidth: '30%', itemStyle: { borderRadius: [4,4,0,0] } },
+                { name: '5月', type: 'bar', data: [106, 320], barWidth: '30%', itemStyle: { borderRadius: [4,4,0,0] } }
+            ]
+        });
+
+        // 3. Channel Chart
+        const channelChart = echarts.init(document.getElementById('channelChart'));
+        const ch = chartsData.channel_trends;
+        channelChart.setOption({
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+            legend: { bottom: 0 },
+            grid: { left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true },
+            xAxis: { type: 'category', data: ['4月', '5月'], axisLine: { lineStyle: { color: colors.outline } } },
+            yAxis: { type: 'value', splitLine: { lineStyle: { color: colors.surfaceContainerLow } } },
+            color: [colors.primary, colors.tertiary],
+            series: [
+                { name: '购物车', type: 'bar', data: [ch.monthly['4月'].购物车, ch.monthly['5月'].购物车], barWidth: '30%', itemStyle: { borderRadius: [4,4,0,0] } },
+                { name: '弹幕', type: 'bar', data: [ch.monthly['4月'].弹幕, ch.monthly['5月'].弹幕], barWidth: '30%', itemStyle: { borderRadius: [4,4,0,0] } }
+            ]
+        });
+
+        // 4. Member Level Chart
+        const memberLevelChart = echarts.init(document.getElementById('memberLevelChart'));
+        const ml = chartsData.member_levels;
+        const months = ['3月', '4月', '5月'];
+        const groups = ['V0-V1 新用户', 'V2-V6 普通会员', 'V7-V10 高价值'];
+        const groupColors = ['#0ea5e9', '#64748b', '#ba1a1a'];
+        const mlSeries = groups.map((g, i) => ({
+            name: g,
+            type: 'bar',
+            stack: 'total',
+            data: months.map(m => ml[m]?.pct?.[g] || 0),
+            itemStyle: { color: groupColors[i] }
+        }));
+        memberLevelChart.setOption({
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+            legend: { bottom: 0 },
+            grid: { left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true },
+            xAxis: { type: 'category', data: months, axisLine: { lineStyle: { color: colors.outline } } },
+            yAxis: { type: 'value', max: 100, axisLabel: { formatter: '{value}%' }, splitLine: { lineStyle: { color: colors.surfaceContainerLow } } },
+            series: mlSeries
+        });
+
+        // 5. Team Bar Chart
         const teamBarChart = echarts.init(document.getElementById('teamBarChart'));
         const t3 = chartsData.team_compare['3月'];
         const t4 = chartsData.team_compare['4月'];
@@ -1017,43 +1694,30 @@
             yAxis: { type: 'value', splitLine: { lineStyle: { color: colors.surfaceContainerLow } } },
             color: [colors.primary, colors.secondary],
             series: [
-                { name: '健康线 (Health)', type: 'bar', data: [t3['健康线']||0, t4['健康线']||0, t5['健康线']||0], barWidth: '30%', itemStyle: { borderRadius: [4,4,0,0] } },
-                { name: '兴趣变美线 (Beauty)', type: 'bar', data: [t3['兴趣变美线']||0, t4['兴趣变美线']||0, t5['兴趣变美线']||0], barWidth: '30%', itemStyle: { borderRadius: [4,4,0,0] } }
+                { name: '健康线', type: 'bar', data: [t3['健康线']||0, t4['健康线']||0, t5['健康线']||0], barWidth: '30%', itemStyle: { borderRadius: [4,4,0,0] } },
+                { name: '兴趣变美线', type: 'bar', data: [t3['兴趣变美线']||0, t4['兴趣变美线']||0, t5['兴趣变美线']||0], barWidth: '30%', itemStyle: { borderRadius: [4,4,0,0] } }
             ]
         });
 
-        // 4. User Level Chart - percentage stacked
-        const userLevelChart = echarts.init(document.getElementById('userLevelChart'));
-        const levels = chartsData.all_levels;
-        const months = ['3月', '4月', '5月'];
-        // 计算每个月各等级的占比
-        const levelSeries = [];
-        const palette = ['#003751', '#006591', '#0ea5e9', '#89ceff', '#c9e6ff', '#e0e3e5', '#bec8d2', '#94a3b8', '#64748b', '#475569', '#334155'];
-        for (let i = 0; i < levels.length; i++) {
-            const lvl = levels[i];
-            const pdata = months.map(m => {
-                const total = Object.values(chartsData.level_data[m] || {}).reduce((a,b) => a+b, 0);
-                const val = (chartsData.level_data[m] || {})[lvl] || 0;
-                return total ? Math.round(val / total * 100) : 0;
-            });
-            levelSeries.push({
-                name: lvl,
-                type: 'bar',
-                stack: 'total',
-                data: pdata,
-                itemStyle: { color: palette[i % palette.length] }
-            });
-        }
-        userLevelChart.setOption({
-            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-            legend: { bottom: 0, type: 'scroll', textStyle: { fontSize: 10 } },
-            grid: { left: '3%', right: '4%', bottom: '18%', top: '5%', containLabel: true },
-            xAxis: { type: 'category', data: months, axisLine: { lineStyle: { color: colors.outline } } },
-            yAxis: { type: 'value', max: 100, axisLabel: { formatter: '{value}%' }, splitLine: { lineStyle: { color: colors.surfaceContainerLow } } },
-            series: levelSeries
+        // 6. Weekday Chart
+        const weekdayChart = echarts.init(document.getElementById('weekdayChart'));
+        const wd = chartsData.weekday_pattern;
+        const wdNames = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+        weekdayChart.setOption({
+            tooltip: { trigger: 'axis' },
+            legend: { bottom: 0 },
+            grid: { left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true },
+            xAxis: { type: 'category', data: wdNames, axisLine: { lineStyle: { color: colors.outline } } },
+            yAxis: { type: 'value', splitLine: { lineStyle: { color: colors.surfaceContainerLow } } },
+            color: [colors.grayMarch, colors.primaryContainer, colors.error],
+            series: [
+                { name: '3月', type: 'line', data: wdNames.map((_, i) => wd['3月']?.[wdNames[i]] || 0), smooth: true, symbol: 'circle' },
+                { name: '4月', type: 'line', data: wdNames.map((_, i) => wd['4月']?.[wdNames[i]] || 0), smooth: true, symbol: 'circle' },
+                { name: '5月', type: 'line', data: wdNames.map((_, i) => wd['5月']?.[wdNames[i]] || 0), smooth: true, symbol: 'circle' }
+            ]
         });
 
-        // 5. Chat Trend Chart
+        // 7. Chat Trend Chart
         const chatTrendChart = echarts.init(document.getElementById('chatTrendChart'));
         const dmDays = Array.from({length: 31}, (_, i) => `${i+1}日`);
         const dmMar = Object.values(chartsData.daily_dm['3月']);
@@ -1061,19 +1725,19 @@
         const dmMay = Object.values(chartsData.daily_dm['5月']).map((v, i) => i < 15 ? v : null);
         chatTrendChart.setOption({
             tooltip: { trigger: 'axis', backgroundColor: '#fff', textStyle: { color: '#191c1e' } },
-            legend: { data: ['3月 (Mar)', '4月 (Apr)', '5月 (May)'], bottom: 0 },
+            legend: { data: ['3月', '4月', '5月'], bottom: 0 },
             grid: { left: '3%', right: '4%', bottom: '12%', top: '5%', containLabel: true },
             xAxis: { type: 'category', boundaryGap: false, data: dmDays, axisLine: { lineStyle: { color: colors.outline } } },
             yAxis: { type: 'value', splitLine: { lineStyle: { color: colors.surfaceContainerLow } } },
             series: [
                 {
-                    name: '3月 (Mar)', type: 'line', data: dmMar,
+                    name: '3月', type: 'line', data: dmMar,
                     itemStyle: { color: colors.grayMarch },
                     lineStyle: { type: 'dashed', width: 2 },
                     symbol: 'none'
                 },
                 {
-                    name: '4月 (Apr)', type: 'line', data: dmApr,
+                    name: '4月', type: 'line', data: dmApr,
                     itemStyle: { color: colors.tertiary },
                     lineStyle: { width: 2 },
                     areaStyle: {
@@ -1085,7 +1749,7 @@
                     symbol: 'none'
                 },
                 {
-                    name: '5月 (May)', type: 'line', data: dmMay,
+                    name: '5月', type: 'line', data: dmMay,
                     itemStyle: { color: colors.error },
                     lineStyle: { width: 2 },
                     symbol: 'circle',
@@ -1094,12 +1758,111 @@
             ]
         });
 
+        // Waterfall Chart
+        const waterfallChart = echarts.init(document.getElementById('waterfallChart'));
+        const wfItems = chartsData.waterfall;
+        const wfCategories = [];
+        const wfBaseData = [];
+        const wfBarData = [];
+        let runningTotal = 0;
+        const COLOR_START = '#006591';
+        const COLOR_INCREASE = '#006c49';
+        const COLOR_DECREASE = '#ba1a1a';
+        const COLOR_END = '#f97316';
+        wfItems.forEach(item => {
+            wfCategories.push(item.name);
+            if (item.type === 'start') {
+                runningTotal = item.value;
+                wfBaseData.push(0);
+                wfBarData.push({ value: item.value, itemStyle: { color: COLOR_START, borderRadius: [4,4,0,0] } });
+            } else if (item.type === 'end') {
+                wfBaseData.push(0);
+                wfBarData.push({ value: runningTotal, itemStyle: { color: COLOR_END, borderRadius: [4,4,0,0] } });
+            } else {
+                const change = item.value;
+                if (change > 0) {
+                    wfBaseData.push(runningTotal);
+                    wfBarData.push({ value: change, itemStyle: { color: COLOR_INCREASE, borderRadius: [4,4,0,0] } });
+                    runningTotal += change;
+                } else {
+                    runningTotal += change;
+                    wfBaseData.push(runningTotal);
+                    wfBarData.push({ value: -change, itemStyle: { color: COLOR_DECREASE, borderRadius: [4,4,0,0] } });
+                }
+            }
+        });
+        waterfallChart.setOption({
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'shadow' },
+                formatter: params => {
+                    const bar = params.find(p => p.seriesIndex === 1);
+                    if (!bar) return '';
+                    const item = wfItems[bar.dataIndex];
+                    const isDecrease = item.type === 'decrease';
+                    const sign = isDecrease ? '-' : (item.type === 'start' || item.type === 'end') ? '' : '+';
+                    const val = isDecrease ? -item.value : (item.type === 'end' ? bar.value : item.value);
+                    return `<b>${bar.name}</b><br/>${sign}${val.toLocaleString()}`;
+                }
+            },
+            legend: {
+                top: 8,
+                data: [
+                    { name: '起始/结束', icon: 'rect', itemStyle: { color: COLOR_START } },
+                    { name: '增长', icon: 'rect', itemStyle: { color: COLOR_INCREASE } },
+                    { name: '减少', icon: 'rect', itemStyle: { color: COLOR_DECREASE } }
+                ]
+            },
+            grid: { top: 50, right: 30, bottom: 80, left: 60 },
+            xAxis: {
+                type: 'category',
+                data: wfCategories,
+                axisLabel: { rotate: 30, color: colors.outline, fontSize: 11 }
+            },
+            yAxis: {
+                type: 'value',
+                name: '购物车线索',
+                splitLine: { lineStyle: { color: colors.surfaceContainerLow } }
+            },
+            series: [
+                {
+                    name: '_base',
+                    type: 'bar',
+                    stack: 'waterfall',
+                    silent: true,
+                    itemStyle: { color: 'transparent', borderColor: 'transparent' },
+                    data: wfBaseData
+                },
+                {
+                    name: 'Change',
+                    type: 'bar',
+                    stack: 'waterfall',
+                    data: wfBarData,
+                    barMaxWidth: 40,
+                    label: {
+                        show: true,
+                        position: 'top',
+                        color: colors.outline,
+                        fontSize: 11,
+                        formatter: p => {
+                            const item = wfItems[p.dataIndex];
+                            if (item.type === 'start' || item.type === 'end') return p.value.toLocaleString();
+                            return (item.value > 0 ? '+' : '') + item.value.toLocaleString();
+                        }
+                    }
+                }
+            ]
+        });
+
         window.addEventListener('resize', function() {
-            kpiRingChart.resize();
             mainTrendChart.resize();
+            holidayChart.resize();
+            channelChart.resize();
+            memberLevelChart.resize();
             teamBarChart.resize();
-            userLevelChart.resize();
+            weekdayChart.resize();
             chatTrendChart.resize();
+            waterfallChart.resize();
         });
     });
 </script>

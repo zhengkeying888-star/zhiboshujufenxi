@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>直播间数据分析 - 入口</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 60px auto; padding: 0 24px; background: #f7f9fb; color: #191c1e; }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  p.sub { color: #6e7881; margin-bottom: 32px; }
+  .card { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .card h2 { font-size: 18px; margin: 0 0 12px; }
+  .card p { margin: 0 0 16px; color: #3e4850; }
+  a.btn { display: inline-block; padding: 10px 20px; background: #006591; color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; }
+  a.btn:hover { background: #004c6e; }
+  a.link { color: #006591; text-decoration: none; }
+  a.link:hover { text-decoration: underline; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  img { max-width: 100%; border-radius: 8px; border: 1px solid #e0e3e5; }
+  .tag { display: inline-block; padding: 2px 8px; background: #c9e6ff; color: #003751; border-radius: 4px; font-size: 12px; font-weight: 600; margin-left: 8px; }
+</style>
+</head>
+<body>
+  <h1>直播间数据分析</h1>
+  <p class="sub">2026年5月周报 · 数据截至5月15日</p>
+
+  <div class="card">
+    <h2>📊 交互式看板 <span class="tag">推荐</span></h2>
+    <p>完整的直播间线索归因复盘看板，含日趋势、品类归因、排期关联等全部模块。</p>
+    <a class="btn" href="dashboard.html" target="_blank">打开看板</a>
+  </div>
+
+  <div class="card">
+    <h2>📄 Markdown 周报</h2>
+    <p>weekly_report_20260517.md — 可直接在 VSCode 中预览，或点击下方链接查看原始文件。</p>
+    <a class="btn" href="weekly_report_20260517.md" target="_blank">查看周报</a>
+  </div>
+
+  <div class="card">
+    <h2>📈 周报图表（3张）</h2>
+    <div class="grid">
+      <div>
+        <p><strong>暴跌品类线索对比</strong></p>
+        <a href="weekly_report_charts/crashed-cats-20260517.png" target="_blank">
+          <img src="weekly_report_charts/crashed-cats-20260517.png" alt="暴跌品类对比"/>
+        </a>
+      </div>
+      <div>
+        <p><strong>线索/万曝光效率排名</strong></p>
+        <a href="weekly_report_charts/exposure-efficiency-20260517.png" target="_blank">
+          <img src="weekly_report_charts/exposure-efficiency-20260517.png" alt="曝光效率排名"/>
+        </a>
+      </div>
+      <div>
+        <p><strong>假期效应分析</strong></p>
+        <a href="weekly_report_charts/holiday-effect-20260517.png" target="_blank">
+          <img src="weekly_report_charts/holiday-effect-20260517.png" alt="假期效应"/>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📁 原始数据</h2>
+    <p>
+      <a class="link" href="dashboard_data.json" target="_blank">dashboard_data.json</a> ·
+      <a class="link" href="weekly_report_charts/" target="_blank">weekly_report_charts/</a>
+    </p>
+  </div>
+</body>
+</html>

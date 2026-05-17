@@ -162,6 +162,80 @@ class FeishuClient:
 
     # --------------------------- Im ---------------------------
 
+    # --------------------------- Rich Doc Blocks ---------------------------
+
+    def create_callout_block(self, text: str, emoji_id: str = "bulb",
+                              background_color: int = 7,
+                              border_color: int = 4,
+                              text_color: int = 4) -> dict:
+        """创建 callout（高亮块）block
+        颜色枚举: background_color 1-15, border_color 1-7, text_color 1-7
+        """
+        return {
+            "block_type": 19,
+            "callout": {
+                "emoji_id": emoji_id,
+                "background_color": background_color,
+                "border_color": border_color,
+                "text_color": text_color,
+                "elements": [{"text_run": {"content": text}}]
+            }
+        }
+
+    def upload_image(self, file_path: str, document_id: str) -> str:
+        """上传图片到文档，返回 file_token"""
+        url = f"{FEISHU_API_BASE}/drive/v1/medias/upload_all"
+        headers = {"Authorization": f"Bearer {self._get_tenant_token()}"}
+
+        file_name = os.path.basename(file_path)
+        file_size = os.path.getsize(file_path)
+
+        with open(file_path, "rb") as f:
+            files = {
+                "file": (file_name, f, "image/png")
+            }
+            data = {
+                "file_name": file_name,
+                "parent_type": "docx_image",
+                "parent_node": document_id,
+                "size": str(file_size)
+            }
+            resp = requests.post(url, headers=headers, data=data, files=files)
+
+        if resp.status_code >= 400:
+            raise RuntimeError(f"上传图片失败: {resp.status_code} {resp.text}")
+        result = resp.json()
+        if result.get("code") != 0:
+            raise RuntimeError(f"上传图片失败: {result}")
+        return result["data"]["file_token"]
+
+    def insert_image_block(self, document_id: str, parent_block_id: str,
+                           file_token: str, width: int = 640, height: int = 480) -> dict:
+        """在指定 block 后插入图片 block"""
+        block = {
+            "block_type": 27,
+            "image": {
+                "token": file_token,
+                "width": width,
+                "height": height
+            }
+        }
+        payload = {"children": [block]}
+        data = self._request("POST",
+                             f"/docx/v1/documents/{document_id}/blocks/{parent_block_id}/children",
+                             json=payload)
+        return data
+
+    def delete_doc_blocks(self, document_id: str, block_ids: list) -> dict:
+        """批量删除文档中的 blocks"""
+        payload = {"block_ids": block_ids}
+        data = self._request("POST",
+                             f"/docx/v1/documents/{document_id}/blocks/batch_delete",
+                             json=payload)
+        return data
+
+    # --------------------------- Im ---------------------------
+
     def send_text_message(self, chat_id: str, text: str) -> None:
         """发送文本消息到群聊"""
         payload = {

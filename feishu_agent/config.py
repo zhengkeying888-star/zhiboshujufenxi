@@ -21,7 +21,7 @@ APP_ID = "cli_xxxxxxxxxxxxxxxx"           # ← 替换为你的 app_id
 APP_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxx"   # ← 替换为你的 app_secret
 
 # ============================================
-# 多维表格配置
+# 多维表格配置 — 线索明细表
 # ============================================
 # 方式A：创建新表格（首次运行）
 #   - 留空，运行 setup_bitable.py 后会自动创建并打印 token
@@ -30,6 +30,13 @@ APP_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxx"   # ← 替换为你的 app_secret
 #   - 从表格分享链接中提取 token（链接中 /base/ 后面的字符串）
 BITABLE_APP_TOKEN = ""                    # ← 例：YlkPbyxeda8FLQsCcJlcSDhPnTb
 BITABLE_TABLE_ID = ""                     # ← 例：tblxxxxxxxxxxxxxx
+
+# ============================================
+# 多维表格配置 — 排期明细表（可选）
+# ============================================
+# 运行 setup_schedule_bitable.py 创建排期多维表后填入
+SCHEDULE_APP_TOKEN = ""                   # ← 排期多维表 app_token
+SCHEDULE_TABLE_ID = ""                    # ← 排期数据表 table_id
 
 # ============================================
 # 飞书文档配置（周报写入）

@@ -1,0 +1,24 @@
+# 敏感配置
+feishu_agent/config_local.py
+config_local.py
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 生成文件
+feishu_agent/output/
+output/
+*.log
+
+# 本地备份（可选）
+weekly_report_*.md
+monthly_report_*.md
+
+# 临时/测试文件
+test_callout.py
+test_blocks.py
+test_emoji.py
+test_emoji2.py
+stitch_.zip
+weekly_report_charts/
