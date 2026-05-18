@@ -164,9 +164,17 @@ def fetch_all_records(client: FeishuClient, app_token: str, table_id: str):
         if not dt:
             continue
 
-        # 统计月（从日期推断或读取字段）
+        # 统计月（兼容 2026-05 和 5月 两种格式）
         if has_stats_month:
-            month_label = fields.get("统计月", "")
+            month_label = str(fields.get("统计月", "")).strip()
+            if not month_label:
+                month_label = f"{dt.month}月"
+            elif "-" in month_label:
+                try:
+                    month_num = int(month_label.split("-")[1])
+                    month_label = f"{month_num}月"
+                except (ValueError, IndexError):
+                    pass
         else:
             month_label = f"{dt.month}月"
 

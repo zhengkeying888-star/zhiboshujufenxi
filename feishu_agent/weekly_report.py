@@ -997,6 +997,36 @@ def _lark_update(doc_id: str, command: str, content: str):
     return result
 
 
+def _set_doc_permission(doc_id: str, doc_type: str = "docx"):
+    """设置飞书文档权限为组织内可读（docx/wiki 自动适配）"""
+    import json
+    body = {
+        "security_entity": "anyone_can_view",
+        "comment_entity": "anyone_can_view",
+    }
+    if doc_type == "docx":
+        body["link_share_entity"] = "tenant_readable"
+        body["external_access"] = False
+        body["share_entity"] = "anyone"
+    elif doc_type == "wiki":
+        # wiki 不支持 link_share_entity 的 anyone 选项，仅设置安全属性
+        body["link_share_entity"] = "tenant_readable"
+    else:
+        return
+
+    cmd = [
+        "lark-cli", "drive", "permission.public", "patch",
+        "--params", json.dumps({"token": doc_id, "type": doc_type}),
+        "--data", json.dumps(body),
+        "--as", "bot",
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"   ⚠️ 权限设置失败: {result.stderr or result.stdout}")
+    else:
+        print(f"   ✅ 文档权限已设置为组织内可读")
+
+
 def _insert_image(doc_id: str, caption: str, path: str):
     if not path or not os.path.exists(path):
         print(f"   ⚠️ 跳过缺失的图表: {caption}")
@@ -1152,6 +1182,14 @@ def main():
     with open(local_path, "w", encoding="utf-8") as f:
         f.write(full_xml)
     print(f"✅ 本地备份: {local_path}")
+
+    # 自动设置文档权限（组织内可读）
+    print("\n🔓 设置文档权限 ...")
+    try:
+        from config_local import WEEKLY_DOC_TYPE
+    except ImportError:
+        WEEKLY_DOC_TYPE = "docx"
+    _set_doc_permission(doc_id, WEEKLY_DOC_TYPE)
 
     if chart_images:
         print(f"✅ 图表保存位置:")
