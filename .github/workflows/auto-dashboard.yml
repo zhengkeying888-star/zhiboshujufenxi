@@ -48,22 +48,16 @@ jobs:
           DASHBOARD_DATA_JSON = "dashboard_data.json"
           EOF
 
-      - name: 同步数据并生成看板
+      - name: 运行完整流水线
         run: |
           cd feishu_agent
-          python sync_and_build.py
-
-      - name: 生成周报
-        if: ${{ github.event.inputs.run_weekly_report != 'false' }}
-        run: |
-          cd feishu_agent
-          python weekly_report.py
+          python orchestrator.py --mode full
 
       - name: 提交更新后的看板
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add dashboard.html dashboard_data.json feishu_agent/weekly_report_*.md
+          git add dashboard.html dashboard_data.json feishu_agent/weekly_report_*.xml feishu_agent/output/weekly-charts/
           git diff --cached --quiet || git commit -m "auto: update dashboard & weekly report $(date +%Y-%m-%d)"
           git push
 

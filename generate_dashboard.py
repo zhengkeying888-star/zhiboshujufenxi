@@ -1,8 +1,17 @@
 import json
 import os
+from datetime import datetime
 
 with open('dashboard_data.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
+
+# 自动读取当前月份和日期
+now = datetime.now()
+current_month = now.month
+current_month_cn = f"{current_month}月"
+last_month_cn = f"{current_month - 1}月" if current_month > 1 else "12月"
+report_date = now.strftime('%Y-%m-%d')
+today_day = now.day
 
 # 计算环比
 def pct_change(new, old):
@@ -11,15 +20,16 @@ def pct_change(new, old):
     v = round((new - old) / old * 100, 1)
     return f"{v:+.1f}"
 
-cart_3 = data['total_stats']['3月']['购物车']
-cart_4 = data['total_stats']['4月']['购物车']
-cart_5 = data['total_stats']['5月']['购物车']
+ts = data.get('total_stats', {})
+cart_3 = ts.get('3月', {}).get('购物车', 0)
+cart_4 = ts.get('4月', {}).get('购物车', 0)
+cart_5 = ts.get('5月', {}).get('购物车', 0)
 cart_change_4 = pct_change(cart_4, cart_3)
 cart_change_5 = pct_change(cart_5, cart_4)
 
-dm_3 = data['total_stats']['3月']['弹幕']
-dm_4 = data['total_stats']['4月']['弹幕']
-dm_5 = data['total_stats']['5月']['弹幕']
+dm_3 = ts.get('3月', {}).get('弹幕', 0)
+dm_4 = ts.get('4月', {}).get('弹幕', 0)
+dm_5 = ts.get('5月', {}).get('弹幕', 0)
 dm_change_4 = pct_change(dm_4, dm_3)
 dm_change_5 = pct_change(dm_5, dm_4)
 
@@ -38,13 +48,14 @@ interest_cats = [c for c in cat_data if c.get('二级团队') == '兴趣变美�
 
 # 目标追踪
 tt = data.get('target_tracking', {})
-target = tt.get('5月购物车目标', 9500)
+target = tt.get('购物车线索目标', 11728)
 achievement = tt.get('达成率', 0)
 gap = tt.get('缺口', 0)
 daily_avg = tt.get('日均', 0)
 projected = tt.get('月底预测', 0)
 projected_pct = tt.get('预测达成率', 0)
-projected_gmv = tt.get('预估流水(按LTV95)', 0)
+projected_gmv = tt.get('预估流水', 0)
+ltv_forecast = tt.get('预测LTV', 76.74)
 
 # 核心归因
 ca = data.get('core_answer', {})
@@ -80,6 +91,11 @@ he = data.get('holiday_effect', {})
 holiday_drop = he.get('holiday_drop', 0)
 normal_drop = he.get('normal_drop', 0)
 holiday_main = he.get('holiday_is_main_factor', False)
+he_counts = he.get('counts', {})
+apr_holiday_avg = int(round(he_counts.get('4月假期(1-5)', 0) / 5, 0)) if he_counts.get('4月假期(1-5)', 0) else 0
+apr_normal_avg = int(round(he_counts.get('4月平日(6-15)', 0) / 10, 0)) if he_counts.get('4月平日(6-15)', 0) else 0
+curr_holiday_avg = int(round(he_counts.get('5月假期(1-5)', 0) / 5, 0)) if he_counts.get('5月假期(1-5)', 0) else 0
+curr_normal_avg = int(round(he_counts.get('5月平日(6-15)', 0) / 10, 0)) if he_counts.get('5月平日(6-15)', 0) else 0
 
 # 帕累托
 pareto = data.get('pareto', {})
@@ -96,6 +112,12 @@ low_conversion = schedule_corr.get('low_conversion', [])
 
 # 会员等级
 member_levels = data.get('member_levels', {})
+ml_prev = member_levels.get('4月', {}).get('pct', {})
+ml_curr = member_levels.get('5月', {}).get('pct', {})
+high_value_prev = ml_prev.get('V7-V10 高价值', 0)
+high_value_curr = ml_curr.get('V7-V10 高价值', 0)
+new_user_prev = ml_prev.get('V0-V1 新用户', 0)
+new_user_curr = ml_curr.get('V0-V1 新用户', 0)
 
 # 健康线分析
 team_health = data.get('team_health_analysis', {})
@@ -103,6 +125,73 @@ team_health = data.get('team_health_analysis', {})
 # 会员等级×品类交叉
 member_cat_cross = data.get('member_category_cross', {})
 high_value_top = member_cat_cross.get('high_value_top', [])
+
+# 新量策略数据
+cart_stats_by_strategy = data.get('cart_stats_by_strategy', {})
+cat_data_by_strategy = data.get('cat_data_by_strategy', [])
+
+# ===== 动态权重计算（按线索缺口绝对值排序）=====
+# 假期影响分
+prev_holiday_cnt = he_counts.get(f'4月假期(1-5)', 0)
+curr_holiday_cnt = he_counts.get(f'5月假期(1-5)', 0)
+holiday_impact_score = abs(prev_holiday_cnt - curr_holiday_cnt)
+
+# 品类塌方影响分（TOP3暴跌品类缺口）
+crashed_loss_top3 = sum(c.get('4月', 0) - c.get('5月', 0) for c in crashed_cats_detail[:3]) if crashed_cats_detail else 0
+category_impact_score = crashed_loss_top3
+
+# 用户结构影响分（高价值用户占比变化 × 当前线索数 / 100）
+user_impact_score = abs(high_value_curr - high_value_prev) * cart_5 / 100 if high_value_prev else 0
+
+# 渠道影响分（购物车环比变化的绝对值 × 4月基数 / 100）
+try:
+    cart_ch_float = float(cart_ch)
+except (ValueError, TypeError):
+    cart_ch_float = 0
+channel_impact_score = abs(cart_ch_float) * cart_4 / 100
+
+attribution_scores = [
+    ("品类塌方", category_impact_score, category_impact_score > 50),
+    ("假期冲击", holiday_impact_score, holiday_impact_score > 50),
+    ("用户结构", user_impact_score, user_impact_score > 30),
+    ("渠道趋势", channel_impact_score, channel_impact_score > 30),
+]
+attribution_scores.sort(key=lambda x: x[1], reverse=True)
+primary_cause = attribution_scores[0][0] if attribution_scores else "待分析"
+
+# ===== TOP5问题品类（按线索缺口绝对值排序）=====
+all_crashed_sorted = sorted(all_crashed_cats, key=lambda c: c.get('4月(1-15)', c.get('4月', 0)) - c.get('5月(1-15)', c.get('5月', 0)), reverse=True)
+top5_problem_cats = all_crashed_sorted[:5]
+
+top5_problem_html = ''
+for c in top5_problem_cats:
+    c4 = c.get('4月(1-15)', c.get('4月', 0))
+    c5 = c.get('5月(1-15)', c.get('5月', 0))
+    change = c.get('环比', 0)
+    ltv = c.get('4月LTV', 0)
+    team = c.get('二级团队', '')
+    team_color = 'text-primary' if team == '健康线' else 'text-secondary'
+    top5_problem_html += f'''
+    <div class="flex items-center justify-between p-3 bg-error-container/20 rounded-lg border-l-4 border-error">
+        <div class="flex items-center gap-3">
+            <span class="text-body-standard font-body-standard font-bold text-on-surface">{c['品类']}</span>
+            <span class="text-subtext font-subtext {team_color}">{team}</span>
+            <span class="text-subtext font-subtext text-outline">LTV¥{ltv}</span>
+        </div>
+        <div class="text-right">
+            <div class="text-body-standard font-body-standard font-bold text-error">{c4:,} → {c5:,} 条 ({change}%)</div>
+            <div class="text-subtext font-subtext text-outline">缺口 {c4-c5:,} 条</div>
+        </div>
+    </div>'''
+
+# ===== 策略构成数据（用于核心归因结论）=====
+apr_y = cart_stats_by_strategy.get('4月', {}).get('是', 0)
+apr_n = cart_stats_by_strategy.get('4月', {}).get('否', 0)
+may_y = cart_stats_by_strategy.get('5月', {}).get('是', 0)
+may_n = cart_stats_by_strategy.get('5月', {}).get('否', 0)
+apr_y_pct = cart_stats_by_strategy.get('4月', {}).get('是占比', 0)
+may_y_pct = cart_stats_by_strategy.get('5月', {}).get('是占比', 0)
+strategy_change = f"新量策略 {apr_y:,}条→{may_y:,}条，非新量 {apr_n:,}条→{may_n:,}条，新量占比 {apr_y_pct}%→{may_y_pct}%"
 
 # 状态标签映射
 status_config = {
@@ -116,9 +205,9 @@ status_config = {
 
 def render_cat_card(c):
     cfg = status_config.get(c.get('状态', '无数据'), status_config['无数据'])
-    c3 = c.get('3月(1-15)', 0)
-    c4 = c.get('4月(1-15)', 0)
-    c5 = c.get('5月(1-15)', 0)
+    c3 = c.get('3月(1-15)', c.get('3月', 0))
+    c4 = c.get('4月(1-15)', c.get('4月', 0))
+    c5 = c.get('5月(1-15)', c.get('5月', 0))
     ltv = c.get('4月LTV', 0)
     team = c.get('二级团队', '')
     team_tag = ''
@@ -152,11 +241,7 @@ def render_cat_card(c):
             </span>
         </div>
         <div class="text-subtext font-subtext text-outline mb-2">4月LTV ¥{ltv}</div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-surface-container-low p-2 rounded">
-                <div class="text-subtext font-subtext text-outline">3月</div>
-                <div class="text-body-standard font-body-standard">{c3:,}</div>
-            </div>
+        <div class="grid grid-cols-2 gap-2 text-center">
             <div class="bg-surface-container-low p-2 rounded">
                 <div class="text-subtext font-subtext text-outline">4月</div>
                 <div class="text-body-standard font-body-standard">{c4:,}</div>
@@ -223,6 +308,37 @@ for c in not_scheduled[:8]:
         <span class="text-body-standard font-body-standard font-bold">{c['品类']}</span>
         <span class="text-subtext font-subtext">4月{c['4月线索']}条 → 5月未排期</span>
     </div>
+    '''
+
+# 新量策略品类细分表格
+strategy_cat_html = ''
+for c in cat_data_by_strategy[:40]:
+    if c['4月'] == 0 and c['5月'] == 0:
+        continue
+    status_badge = ''
+    if c.get('状态') == '消失':
+        status_badge = '<span class="px-2 py-0.5 rounded bg-[#1e293b] text-white text-label-pill">消失</span>'
+    elif c.get('状态') == '暴跌':
+        status_badge = '<span class="px-2 py-0.5 rounded bg-error-container text-error text-label-pill">暴跌</span>'
+    elif c.get('状态') == '下滑':
+        status_badge = '<span class="px-2 py-0.5 rounded bg-[#fff7ed] text-[#f97316] text-label-pill">下滑</span>'
+    elif c.get('状态') == '扛住':
+        status_badge = '<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-label-pill">扛住</span>'
+    elif c.get('状态') == '新增':
+        status_badge = '<span class="px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed text-label-pill">新增</span>'
+    else:
+        status_badge = '<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant text-label-pill">无数据</span>'
+
+    change_color = 'text-error' if c.get('环比', 0) < 0 else ('text-secondary' if c.get('环比', 0) > 0 else 'text-on-surface')
+    strategy_cat_html += f'''
+    <tr class="border-b border-outline-variant">
+        <td class="py-2 px-3 text-body-standard font-body-standard font-bold">{c['品类']}</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">{'新量-是' if c['策略'] == '是' else '非新量-否'}</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">{c['4月']:,}</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right">{c['5月']:,}</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard text-right {change_color} font-bold">{c['环比']}%</td>
+        <td class="py-2 px-3 text-body-standard font-body-standard">{status_badge}</td>
+    </tr>
     '''
 
 # 排期关联表格
@@ -565,6 +681,7 @@ charts_data_json = json.dumps({
     'weekday_pattern': data.get('weekday_pattern', {}),
     'pareto': pareto,
     'waterfall': wf_items,
+    'cart_stats_by_strategy': data.get('cart_stats_by_strategy', {}),
 }, ensure_ascii=False)
 
 html = f'''<!DOCTYPE html>
@@ -687,11 +804,11 @@ html = f'''<!DOCTYPE html>
 <header class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm docked full-width top-0 sticky z-50">
     <div class="flex justify-between items-center w-full px-margin h-16 max-w-container-max mx-auto">
         <div>
-            <h1 class="text-title-main font-title-main text-on-surface dark:text-inverse-on-surface">直播间线索归因复盘看板</h1>
-            <p class="text-subtext font-subtext text-outline mt-0.5">2026年3-5月趋势对比 · 数据截至5月15日</p>
+            <h1 class="text-title-main font-title-main text-on-surface dark:text-inverse-on-surface">直播间线索归因复盘看板 | {now.year}年{current_month}月</h1>
+            <p class="text-subtext font-subtext text-outline mt-0.5">{last_month_cn} vs {current_month_cn}同期对比 · 数据截至{report_date}</p>
         </div>
         <div class="flex items-center gap-4">
-            <span class="text-subtext font-subtext text-outline">最后更新: 2026-05-15</span>
+            <span class="text-subtext font-subtext text-outline">最后更新: {report_date}</span>
             <button onclick="window.location.reload()" class="text-primary dark:text-primary-fixed-dim hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors p-2 rounded-full active:scale-95 duration-100 ease-in-out">
                 <span class="material-symbols-outlined" data-icon="refresh">refresh</span>
             </button>
@@ -708,37 +825,45 @@ html = f'''<!DOCTYPE html>
             <div class="flex-1">
                 <h2 class="text-title-main font-title-main text-error mb-2">核心归因结论</h2>
                 <p class="text-body-standard font-body-standard text-on-surface leading-relaxed">
-                    5月较4月同期购物车线索跌 <strong class="text-error">{total_loss:,}</strong> 条（-{abs(round(total_loss/cart_4*100,1))}%）。
-                    {'<span class="text-error font-bold">头部品类塌方是主因</span>：暴跌品类贡献' + str(crashed_pct) + '%跌幅，' if not uniform_drop else '<span class="text-error font-bold">暴跌品类贡献' + str(crashed_pct) + '%跌幅</span>，'}
-                    {'消失品类贡献' + str(disappeared_pct) + '%。' if disappeared_pct > 0 else ''}
-                    {'<span class="text-primary font-bold">劳动节假期是主要影响因素</span>：假期日均线索较4月同期跌' + str(abs(holiday_drop)) + '%，但5月6日后平日日均已恢复至320条（与4月持平）。' if holiday_main else ''}
-                    {'渠道端购物车和弹幕同比例下跌（' + str(cart_ch) + '% vs ' + str(dm_ch) + '%），判断为<span class="text-primary font-bold">曝光端问题</span>，非直播间引导问题。' if same_trend else ''}
+                    {current_month_cn}较{last_month_cn}同期购物车线索跌 <strong class="text-error">{total_loss:,}</strong> 条（{pct_change(cart_5, cart_4)}）。
+                    <span class="text-error font-bold">{primary_cause}是主因</span>：
+                    {'暴跌品类贡献' + str(crashed_pct) + '%跌幅，' if crashed_pct > 0 else ''}
+                    {'劳动节假期是主要影响因素：假期日均线索较4月同期跌' + str(abs(holiday_drop)) + '%，' if holiday_main else ''}
+                    渠道端购物车和弹幕同比例下跌，判断为<span class="text-primary font-bold">曝光端问题</span>，非直播间引导问题。
+                    策略构成方面：{strategy_change}。
                 </p>
+
+                <!-- 暴跌品类TOP3 -->
                 <div class="mt-4 bg-error-container/20 rounded-lg p-3">
                     <div class="text-body-standard font-body-standard font-bold text-error mb-2">📉 暴跌品类明细（贡献{crashed_pct}%跌幅）</div>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                        {crashed_cards_html}
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                        {top5_problem_html}
                     </div>
                 </div>
+
+                <!-- 线级对比 -->
                 <div class="mt-3 bg-surface-container-low rounded-lg p-3">
                     <div class="text-body-standard font-body-standard font-bold text-on-surface mb-1">🏥 健康线跌幅更大</div>
                     <div class="text-body-standard font-body-standard text-on-surface">
-                        健康线 4月{team_health['健康线_4月']:,}条 → 5月{team_health['健康线_5月']:,}条（<strong class="text-error">{team_health['健康线跌幅']}%</strong>），
-                        兴趣变美线 4月{team_health['兴趣变美线_4月']:,}条 → 5月{team_health['兴趣变美线_5月']:,}条（<strong class="text-error">{team_health['兴趣变美线跌幅']}%</strong>）。
-                        健康线跌幅是变美线的 <strong>{abs(round(team_health['健康线跌幅']/team_health['兴趣变美线跌幅'],1)) if team_health['兴趣变美线跌幅'] != 0 else 'N/A'}</strong> 倍。
+                        健康线 {last_month_cn}{team_health.get('健康线_4月', 0):,}条 → {current_month_cn}{team_health.get('健康线_5月', 0):,}条（<strong class="text-error">{team_health.get('健康线跌幅', 0)}%</strong>），
+                        兴趣变美线 {last_month_cn}{team_health.get('兴趣变美线_4月', 0):,}条 → {current_month_cn}{team_health.get('兴趣变美线_5月', 0):,}条（<strong class="text-error">{team_health.get('兴趣变美线跌幅', 0)}%</strong>）。
+                        健康线跌幅是变美线的 <strong>{abs(round(team_health.get('健康线跌幅', 0)/team_health.get('兴趣变美线跌幅', 1), 1)) if team_health.get('兴趣变美线跌幅', 1) != 0 else 'N/A'}</strong> 倍。
                     </div>
                 </div>
-                <div class="mt-3 flex gap-4 text-subtext font-subtext">
+
+                <!-- 底部小标签 -->
+                <div class="mt-3 flex flex-wrap gap-4 text-subtext font-subtext">
                     <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-error"></span> 购物车跌 {cart_change_5}</span>
                     <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary"></span> 弹幕跌 {dm_change_5}</span>
-                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span> TOP5集中度 4月{pareto_4}% → 5月{pareto_5}%</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span> TOP5集中度 {last_month_cn}{pareto_4}% → {current_month_cn}{pareto_5}%</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span> 新量占比 {apr_y_pct}% → {may_y_pct}%</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ========== KPIs + 目标追踪 ========== -->
-    <section class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
         <!-- Cart -->
         <div class="glass-card rounded-xl p-card-padding flex flex-col gap-4">
             <div class="flex items-center justify-between">
@@ -748,7 +873,7 @@ html = f'''<!DOCTYPE html>
             <div class="flex items-end gap-4">
                 <div>
                     <div class="text-metric-display font-metric-display text-error">{cart_5:,}</div>
-                    <div class="text-subtext font-subtext text-on-surface-variant mt-1">5月 (1-15日)</div>
+                    <div class="text-subtext font-subtext text-on-surface-variant mt-1">{current_month_cn} (1-{today_day}日)</div>
                 </div>
                 <div class="flex items-center text-error bg-error-container px-2 py-1 rounded-md mb-1">
                     <span class="material-symbols-outlined text-[16px] mr-1">trending_down</span>
@@ -756,57 +881,75 @@ html = f'''<!DOCTYPE html>
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest mt-2">
+                <div><div class="text-body-standard font-body-standard">{cart_4:,}</div><div class="text-subtext text-outline">{last_month_cn}</div></div>
                 <div><div class="text-body-standard font-body-standard">{cart_3:,}</div><div class="text-subtext text-outline">3月</div></div>
-                <div><div class="text-body-standard font-body-standard">{cart_4:,}</div><div class="text-subtext text-outline">4月</div></div>
             </div>
         </div>
-        <!-- Chat -->
+        <!-- 新量策略 -->
         <div class="glass-card rounded-xl p-card-padding flex flex-col gap-4">
             <div class="flex items-center justify-between">
-                <h2 class="text-module-title font-module-title text-on-surface-variant">弹幕线索</h2>
-                <span class="material-symbols-outlined text-outline-variant">chat_bubble</span>
+                <h2 class="text-module-title font-module-title text-on-surface-variant">新量策略</h2>
+                <span class="material-symbols-outlined text-outline-variant">group_add</span>
             </div>
             <div class="flex items-end gap-4">
                 <div>
-                    <div class="text-metric-display font-metric-display text-error">{dm_5:,}</div>
-                    <div class="text-subtext font-subtext text-on-surface-variant mt-1">5月 (1-15日)</div>
+                    <div class="text-metric-display font-metric-display text-on-surface">{may_y:,}</div>
+                    <div class="text-subtext font-subtext text-on-surface-variant mt-1">占比 {may_y_pct}%</div>
                 </div>
                 <div class="flex items-center text-error bg-error-container px-2 py-1 rounded-md mb-1">
                     <span class="material-symbols-outlined text-[16px] mr-1">trending_down</span>
-                    <span class="text-label-pill font-label-pill">{dm_change_5}%</span>
+                    <span class="text-label-pill font-label-pill">{pct_change(may_y, apr_y)}</span>
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest mt-2">
-                <div><div class="text-body-standard font-body-standard">{dm_3:,}</div><div class="text-subtext text-outline">3月</div></div>
-                <div><div class="text-body-standard font-body-standard">{dm_4:,}</div><div class="text-subtext text-outline">4月</div></div>
+                <div><div class="text-body-standard font-body-standard">{apr_y:,}</div><div class="text-subtext text-outline">{last_month_cn}</div></div>
+                <div><div class="text-body-standard font-body-standard">{may_y - apr_y:+,}</div><div class="text-subtext text-outline">变化</div></div>
             </div>
         </div>
-        <!-- Target Progress -->
-        <div class="glass-card rounded-xl p-card-padding flex flex-col gap-4 md:col-span-2">
+        <!-- 非新量策略 -->
+        <div class="glass-card rounded-xl p-card-padding flex flex-col gap-4">
             <div class="flex items-center justify-between">
-                <h2 class="text-module-title font-module-title text-on-surface-variant">5月目标追踪</h2>
+                <h2 class="text-module-title font-module-title text-on-surface-variant">非新量策略</h2>
+                <span class="material-symbols-outlined text-outline-variant">groups</span>
+            </div>
+            <div class="flex items-end gap-4">
+                <div>
+                    <div class="text-metric-display font-metric-display text-on-surface">{may_n:,}</div>
+                    <div class="text-subtext font-subtext text-on-surface-variant mt-1">占比 {100 - may_y_pct}%</div>
+                </div>
+                <div class="flex items-center text-error bg-error-container px-2 py-1 rounded-md mb-1">
+                    <span class="material-symbols-outlined text-[16px] mr-1">trending_down</span>
+                    <span class="text-label-pill font-label-pill">{pct_change(may_n, apr_n)}</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest mt-2">
+                <div><div class="text-body-standard font-body-standard">{apr_n:,}</div><div class="text-subtext text-outline">{last_month_cn}</div></div>
+                <div><div class="text-body-standard font-body-standard">{may_n - apr_n:+,}</div><div class="text-subtext text-outline">变化</div></div>
+            </div>
+        </div>
+        <!-- 目标追踪 -->
+        <div class="glass-card rounded-xl p-card-padding flex flex-col gap-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-module-title font-module-title text-on-surface-variant">{current_month_cn}目标追踪</h2>
                 <span class="material-symbols-outlined text-outline-variant">track_changes</span>
             </div>
-            <div class="flex items-end gap-6">
-                <div>
-                    <div class="text-metric-display font-metric-display text-on-surface">{achievement}%</div>
-                    <div class="text-subtext font-subtext text-on-surface-variant mt-1">目标达成率 ({cart_5:,} / {target:,})</div>
+            <div>
+                <div class="text-metric-display font-metric-display text-error">{achievement}%</div>
+                <div class="text-subtext font-subtext text-on-surface-variant mt-1">目标达成率 ({cart_5:,} / {target:,})</div>
+            </div>
+            <div class="flex-1 pb-2">
+                <div class="w-full bg-surface-container-high rounded-full h-3">
+                    <div class="{prog_color} h-3 rounded-full transition-all" style="width: {prog_width}%"></div>
                 </div>
-                <div class="flex-1 pb-2">
-                    <div class="w-full bg-surface-container-high rounded-full h-3">
-                        <div class="{prog_color} h-3 rounded-full transition-all" style="width: {prog_width}%"></div>
-                    </div>
-                    <div class="flex justify-between text-subtext font-subtext mt-1">
-                        <span>缺口: {gap:,}</span>
-                        <span>日均: {daily_avg:.0f}</span>
-                        <span>预测月底: {projected:,.0f} ({projected_pct}%)</span>
-                    </div>
+                <div class="flex justify-between text-subtext font-subtext mt-1">
+                    <span>缺口 {gap:,}</span>
+                    <span>预测 {projected_pct}%</span>
                 </div>
             </div>
             <div class="pt-4 border-t border-surface-container-highest">
                 <div class="text-body-standard font-body-standard text-on-surface">
-                    预估流水 (按LTV¥95): <strong>¥{projected_gmv:,.0f}</strong> / 目标¥900,000
-                    <span class="text-subtext font-subtext text-outline ml-2">(预测达成 {round(projected_gmv/900000*100,1)}%)</span>
+                    预估流水 <strong>¥{projected_gmv:,.0f}</strong> / 目标¥900,000
+                    <span class="text-subtext font-subtext text-outline ml-1">(LTV¥{ltv_forecast})</span>
                 </div>
             </div>
         </div>
@@ -824,19 +967,19 @@ html = f'''<!DOCTYPE html>
             <div class="mt-4 space-y-3">
                 <div class="flex justify-between items-center p-3 bg-surface-container-low rounded">
                     <span class="text-body-standard font-body-standard">4月假期(1-5)日均</span>
-                    <span class="text-body-standard font-body-standard font-bold">307</span>
+                    <span class="text-body-standard font-body-standard font-bold">{apr_holiday_avg}</span>
                 </div>
                 <div class="flex justify-between items-center p-3 bg-error-container/30 rounded">
                     <span class="text-body-standard font-body-standard text-error">5月假期(1-5)日均</span>
-                    <span class="text-body-standard font-body-standard font-bold text-error">106 ({holiday_drop}%)</span>
+                    <span class="text-body-standard font-body-standard font-bold text-error">{curr_holiday_avg} ({holiday_drop}%)</span>
                 </div>
                 <div class="flex justify-between items-center p-3 bg-surface-container-low rounded">
                     <span class="text-body-standard font-body-standard">4月平日(6-15)日均</span>
-                    <span class="text-body-standard font-body-standard font-bold">319</span>
+                    <span class="text-body-standard font-body-standard font-bold">{apr_normal_avg}</span>
                 </div>
                 <div class="flex justify-between items-center p-3 bg-secondary-container/30 rounded">
                     <span class="text-body-standard font-body-standard text-secondary">5月平日(6-15)日均</span>
-                    <span class="text-body-standard font-body-standard font-bold text-secondary">320 (+0.1%)</span>
+                    <span class="text-body-standard font-body-standard font-bold text-secondary">{curr_normal_avg} ({'+' if normal_drop >= 0 else ''}{normal_drop}%)</span>
                 </div>
             </div>
             <p class="text-subtext font-subtext text-outline mt-4">
@@ -845,32 +988,31 @@ html = f'''<!DOCTYPE html>
         </div>
     </section>
 
-    <!-- ========== 渠道趋势 + 会员等级 ========== -->
+    <!-- ========== 新量策略对比 + 会员等级 ========== -->
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
         <div class="glass-card rounded-xl p-card-padding">
-            <h2 class="text-module-title font-module-title text-on-surface mb-4">渠道趋势对比 (购物车 vs 弹幕) <span class="text-subtext font-subtext text-outline font-normal">· 1-15号同期</span></h2>
-            <div class="w-full h-[250px]" id="channelChart"></div>
+            <h2 class="text-module-title font-module-title text-on-surface mb-4">新量策略同期对比 <span class="text-subtext font-subtext text-outline font-normal">· 购物车1-{today_day}号</span></h2>
+            <div class="w-full h-[250px]" id="strategyBarChart"></div>
             <div class="mt-4 p-3 bg-surface-container-low rounded">
                 <p class="text-body-standard font-body-standard text-on-surface">
-                    <span class="font-bold">结论：</span>{channel_conclusion}
+                    <span class="font-bold">结论：</span>
+                    新量策略（是）{cart_stats_by_strategy.get('4月', {}).get('是', 0)}条 → {cart_stats_by_strategy.get('5月', {}).get('是', 0)}条，
+                    非新量（否）{cart_stats_by_strategy.get('4月', {}).get('否', 0)}条 → {cart_stats_by_strategy.get('5月', {}).get('否', 0)}条。
+                    新量占比 {cart_stats_by_strategy.get('4月', {}).get('是占比', 0)}% → {cart_stats_by_strategy.get('5月', {}).get('是占比', 0)}%。
                 </p>
-                <div class="flex gap-4 mt-2 text-subtext font-subtext">
-                    <span>购物车环比: <strong class="text-error">{cart_ch}%</strong></span>
-                    <span>弹幕环比: <strong class="text-error">{dm_ch}%</strong></span>
-                </div>
             </div>
         </div>
         <div class="glass-card rounded-xl p-card-padding">
-            <h2 class="text-module-title font-module-title text-on-surface mb-4">会员等级结构变化 <span class="text-subtext font-subtext text-outline font-normal">· 1-15号同期</span></h2>
+            <h2 class="text-module-title font-module-title text-on-surface mb-4">会员等级结构变化 <span class="text-subtext font-subtext text-outline font-normal">· 1-{today_day}号同期</span></h2>
             <div class="w-full h-[250px]" id="memberLevelChart"></div>
             <div class="mt-4 space-y-2 text-subtext font-subtext">
                 <div class="flex justify-between p-2 bg-surface-container-low rounded">
                     <span>V7-V10 高价值用户</span>
-                    <span class="text-error font-bold">4月18.0% → 5月12.3% ↓</span>
+                    <span class="text-error font-bold">4月{high_value_prev}% → 5月{high_value_curr}% {'↓' if high_value_curr < high_value_prev else '↑'}</span>
                 </div>
                 <div class="flex justify-between p-2 bg-surface-container-low rounded">
                     <span>V0-V1 新用户</span>
-                    <span class="text-error font-bold">4月52.3% → 5月59.9% ↑</span>
+                    <span class="text-error font-bold">4月{new_user_prev}% → 5月{new_user_curr}% {'↑' if new_user_curr > new_user_prev else '↓'}</span>
                 </div>
             </div>
         </div>
@@ -879,7 +1021,7 @@ html = f'''<!DOCTYPE html>
     <!-- ========== 团队对比 + 星期几 ========== -->
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
         <div class="glass-card rounded-xl p-card-padding">
-            <h2 class="text-module-title font-module-title text-on-surface mb-6">同期对比 (1-15号) · 二级团队线索量</h2>
+            <h2 class="text-module-title font-module-title text-on-surface mb-6">同期对比 (1-{today_day}号) · 二级团队线索量</h2>
             <div class="w-full h-[300px]" id="teamBarChart"></div>
         </div>
         <div class="glass-card rounded-xl p-card-padding">
@@ -921,7 +1063,7 @@ html = f'''<!DOCTYPE html>
 
     <!-- ========== 线索变化瀑布图 ========== -->
     <section class="glass-card rounded-xl p-card-padding">
-        <h2 class="text-module-title font-module-title text-on-surface mb-4">线索变化瀑布图 <span class="text-subtext font-subtext text-outline font-normal">· 4月(1-15)→5月(1-15)品类归因</span></h2>
+        <h2 class="text-module-title font-module-title text-on-surface mb-4">线索变化瀑布图 <span class="text-subtext font-subtext text-outline font-normal">· 4月(1-{today_day})→5月(1-{today_day})品类归因</span></h2>
         <div class="w-full h-[450px]" id="waterfallChart"></div>
         <div class="mt-4 p-3 bg-surface-container-low rounded">
             <p class="text-body-standard font-body-standard text-on-surface">
@@ -930,25 +1072,39 @@ html = f'''<!DOCTYPE html>
         </div>
     </section>
 
+    <!-- ========== 新量策略品类细分 ========== -->
+    <section class="glass-card rounded-xl p-card-padding">
+        <h2 class="text-module-title font-module-title text-on-surface mb-4">新量策略品类细分 <span class="text-subtext font-subtext text-outline font-normal">· 4月(1-15)→5月(1-15) 同期对比 · 购物车</span></h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="border-b-2 border-outline-variant">
+                        <th class="py-2 px-3 text-subtext font-subtext">品类</th>
+                        <th class="py-2 px-3 text-subtext font-subtext">策略</th>
+                        <th class="py-2 px-3 text-subtext font-subtext text-right">4月线索</th>
+                        <th class="py-2 px-3 text-subtext font-subtext text-right">5月线索</th>
+                        <th class="py-2 px-3 text-subtext font-subtext text-right">环比</th>
+                        <th class="py-2 px-3 text-subtext font-subtext">状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {strategy_cat_html}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
     <!-- ========== 品类归因卡片 ========== -->
-    <section class="space-y-6">
-        <div class="flex items-center justify-between">
-            <h2 class="text-title-main font-title-main text-on-surface">品类线索归因分析 <span class="text-subtext font-subtext text-outline font-normal">（1-15号同期对比）</span></h2>
+    <section class="glass-card rounded-xl p-card-padding">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-title-main font-title-main text-on-surface">问题品类 TOP5 <span class="text-subtext font-subtext text-outline font-normal">（按线索缺口绝对值排序 · {last_month_cn} vs {current_month_cn}）</span></h2>
             <div class="flex gap-3 text-subtext font-subtext">
-                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-error"></span> 暴跌/下滑</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-error"></span> 暴跌</span>
                 <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-[#1e293b]"></span> 消失</span>
-                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-secondary"></span> 扛住</span>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-            <div class="space-y-4">
-                <h3 class="text-module-title font-module-title text-primary border-b-2 border-primary-container pb-2 inline-block">健康线</h3>
-                {health_cards}
-            </div>
-            <div class="space-y-4">
-                <h3 class="text-module-title font-module-title text-secondary border-b-2 border-secondary-container pb-2 inline-block">兴趣变美线</h3>
-                {interest_cards}
-            </div>
+        <div class="space-y-2">
+            {top5_problem_html}
         </div>
     </section>
 
@@ -965,7 +1121,7 @@ html = f'''<!DOCTYPE html>
     <section class="glass-card rounded-xl p-card-padding">
         <div class="flex items-center gap-2 mb-4">
             <span class="material-symbols-outlined text-primary text-2xl">event_note</span>
-            <h2 class="text-module-title font-module-title text-on-surface">排期差异分析 <span class="text-subtext font-subtext text-outline font-normal">· 4月(1-15)→5月(1-15) 同期对比 · 按暴跌原因分组</span></h2>
+            <h2 class="text-module-title font-module-title text-on-surface">排期差异分析 <span class="text-subtext font-subtext text-outline font-normal">· 4月(1-{today_day})→5月(1-{today_day}) 同期对比 · 按暴跌原因分组</span></h2>
         </div>
         {schedule_diff_html}
     </section>
@@ -1019,12 +1175,6 @@ html = f'''<!DOCTYPE html>
         </div>
     </section>
 
-    <!-- ========== 弹幕趋势 ========== -->
-    <section class="glass-card rounded-xl p-card-padding">
-        <h2 class="text-module-title font-module-title text-on-surface mb-6">公屏弹幕线索趋势</h2>
-        <div class="w-full h-[250px]" id="chatTrendChart"></div>
-    </section>
-
     <!-- ========== 发现 + 复盘 ========== -->
     <section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
         <div class="lg:col-span-1 glass-card rounded-xl p-card-padding h-full">
@@ -1068,56 +1218,62 @@ html = f'''<!DOCTYPE html>
         // 1. Main Trend Chart
         const mainTrendChart = echarts.init(document.getElementById('mainTrendChart'));
         const days = Array.from({{length: 31}}, (_, i) => `${{i+1}}日`);
-        const marData = Object.values(chartsData.daily_cart['3月']);
+        const hasMar = chartsData.daily_cart && '3月' in chartsData.daily_cart;
+        const marData = hasMar ? Object.values(chartsData.daily_cart['3月']) : [];
         const aprData = Object.values(chartsData.daily_cart['4月']);
-        const mayData = Object.values(chartsData.daily_cart['5月']).map((v, i) => i < 15 ? v : null);
+        const mayData = Object.values(chartsData.daily_cart['5月']).map((v, i) => i < {today_day} ? v : null);
+        const legendData = ['4月', '5月'];
+        if (hasMar) legendData.unshift('3月');
+        const seriesList = [
+            {{
+                name: '4月', type: 'line', data: aprData,
+                itemStyle: {{ color: colors.primaryContainer }},
+                lineStyle: {{ width: 2 }},
+                areaStyle: {{
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        {{ offset: 0, color: 'rgba(14, 165, 233, 0.2)' }},
+                        {{ offset: 1, color: 'rgba(14, 165, 233, 0.0)' }}
+                    ])
+                }},
+                symbol: 'none'
+            }},
+            {{
+                name: '5月', type: 'line', data: mayData,
+                itemStyle: {{ color: colors.error }},
+                lineStyle: {{ width: 2 }},
+                areaStyle: {{
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        {{ offset: 0, color: 'rgba(186, 26, 26, 0.2)' }},
+                        {{ offset: 1, color: 'rgba(186, 26, 26, 0.0)' }}
+                    ])
+                }},
+                markArea: {{
+                    silent: true,
+                    data: [[
+                        {{ xAxis: '1日', itemStyle: {{ color: 'rgba(186,26,26,0.05)' }} }},
+                        {{ xAxis: '5日', itemStyle: {{ color: 'rgba(186,26,26,0.05)' }} }}
+                    ]]
+                }},
+                symbol: 'circle',
+                symbolSize: 6
+            }}
+        ];
+        if (hasMar) {{
+            seriesList.unshift({{
+                name: '3月', type: 'line', data: marData,
+                itemStyle: {{ color: colors.grayMarch }},
+                lineStyle: {{ type: 'dashed', width: 2 }},
+                symbol: 'none'
+            }});
+        }}
 
         mainTrendChart.setOption({{
             tooltip: {{ trigger: 'axis', backgroundColor: '#fff', textStyle: {{ color: '#191c1e' }}, extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);' }},
-            legend: {{ data: ['3月', '4月', '5月'], bottom: 0 }},
+            legend: {{ data: legendData, bottom: 0 }},
             grid: {{ left: '3%', right: '4%', bottom: '10%', top: '5%', containLabel: true }},
             xAxis: {{ type: 'category', boundaryGap: false, data: days, axisLine: {{ lineStyle: {{ color: colors.outline }} }} }},
             yAxis: {{ type: 'value', splitLine: {{ lineStyle: {{ color: colors.surfaceContainerLow }} }} }},
-            series: [
-                {{
-                    name: '3月', type: 'line', data: marData,
-                    itemStyle: {{ color: colors.grayMarch }},
-                    lineStyle: {{ type: 'dashed', width: 2 }},
-                    symbol: 'none'
-                }},
-                {{
-                    name: '4月', type: 'line', data: aprData,
-                    itemStyle: {{ color: colors.primaryContainer }},
-                    lineStyle: {{ width: 2 }},
-                    areaStyle: {{
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            {{ offset: 0, color: 'rgba(14, 165, 233, 0.2)' }},
-                            {{ offset: 1, color: 'rgba(14, 165, 233, 0.0)' }}
-                        ])
-                    }},
-                    symbol: 'none'
-                }},
-                {{
-                    name: '5月', type: 'line', data: mayData,
-                    itemStyle: {{ color: colors.error }},
-                    lineStyle: {{ width: 2 }},
-                    areaStyle: {{
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            {{ offset: 0, color: 'rgba(186, 26, 26, 0.2)' }},
-                            {{ offset: 1, color: 'rgba(186, 26, 26, 0.0)' }}
-                        ])
-                    }},
-                    markArea: {{
-                        silent: true,
-                        data: [[
-                            {{ xAxis: '1日', itemStyle: {{ color: 'rgba(186,26,26,0.05)' }} }},
-                            {{ xAxis: '5日', itemStyle: {{ color: 'rgba(186,26,26,0.05)' }} }}
-                        ]]
-                    }},
-                    symbol: 'circle',
-                    symbolSize: 6
-                }}
-            ]
+            series: seriesList
         }});
 
         // 2. Holiday Chart
@@ -1136,10 +1292,10 @@ html = f'''<!DOCTYPE html>
             ]
         }});
 
-        // 3. Channel Chart
-        const channelChart = echarts.init(document.getElementById('channelChart'));
-        const ch = chartsData.channel_trends;
-        channelChart.setOption({{
+        // 3. Strategy Bar Chart
+        const strategyBarChart = echarts.init(document.getElementById('strategyBarChart'));
+        const st = chartsData.cart_stats_by_strategy || {{}};
+        strategyBarChart.setOption({{
             tooltip: {{ trigger: 'axis', axisPointer: {{ type: 'shadow' }} }},
             legend: {{ bottom: 0 }},
             grid: {{ left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true }},
@@ -1147,15 +1303,15 @@ html = f'''<!DOCTYPE html>
             yAxis: {{ type: 'value', splitLine: {{ lineStyle: {{ color: colors.surfaceContainerLow }} }} }},
             color: [colors.primary, colors.tertiary],
             series: [
-                {{ name: '购物车', type: 'bar', data: [ch.monthly['4月'].购物车, ch.monthly['5月'].购物车], barWidth: '30%', itemStyle: {{ borderRadius: [4,4,0,0] }} }},
-                {{ name: '弹幕', type: 'bar', data: [ch.monthly['4月'].弹幕, ch.monthly['5月'].弹幕], barWidth: '30%', itemStyle: {{ borderRadius: [4,4,0,0] }} }}
+                {{ name: '新量-是', type: 'bar', data: [st['4月']?.['是']||0, st['5月']?.['是']||0], barWidth: '30%', itemStyle: {{ borderRadius: [4,4,0,0] }} }},
+                {{ name: '非新量-否', type: 'bar', data: [st['4月']?.['否']||0, st['5月']?.['否']||0], barWidth: '30%', itemStyle: {{ borderRadius: [4,4,0,0] }} }}
             ]
         }});
 
         // 4. Member Level Chart
         const memberLevelChart = echarts.init(document.getElementById('memberLevelChart'));
         const ml = chartsData.member_levels;
-        const months = ['3月', '4月', '5月'];
+        const months = ['4月', '5月'];
         const groups = ['V0-V1 新用户', 'V2-V6 普通会员', 'V7-V10 高价值'];
         const groupColors = ['#0ea5e9', '#64748b', '#ba1a1a'];
         const mlSeries = groups.map((g, i) => ({{
@@ -1176,19 +1332,18 @@ html = f'''<!DOCTYPE html>
 
         // 5. Team Bar Chart
         const teamBarChart = echarts.init(document.getElementById('teamBarChart'));
-        const t3 = chartsData.team_compare['3月'];
         const t4 = chartsData.team_compare['4月'];
         const t5 = chartsData.team_compare['5月'];
         teamBarChart.setOption({{
             tooltip: {{ trigger: 'axis', axisPointer: {{ type: 'shadow' }} }},
             legend: {{ bottom: 0 }},
             grid: {{ left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true }},
-            xAxis: {{ type: 'category', data: ['3月(1-15)', '4月(1-15)', '5月(1-15)'], axisLine: {{ lineStyle: {{ color: colors.outline }} }} }},
+            xAxis: {{ type: 'category', data: ['4月(1-{today_day})', '5月(1-{today_day})'], axisLine: {{ lineStyle: {{ color: colors.outline }} }} }},
             yAxis: {{ type: 'value', splitLine: {{ lineStyle: {{ color: colors.surfaceContainerLow }} }} }},
             color: [colors.primary, colors.secondary],
             series: [
-                {{ name: '健康线', type: 'bar', data: [t3['健康线']||0, t4['健康线']||0, t5['健康线']||0], barWidth: '30%', itemStyle: {{ borderRadius: [4,4,0,0] }} }},
-                {{ name: '兴趣变美线', type: 'bar', data: [t3['兴趣变美线']||0, t4['兴趣变美线']||0, t5['兴趣变美线']||0], barWidth: '30%', itemStyle: {{ borderRadius: [4,4,0,0] }} }}
+                {{ name: '健康线', type: 'bar', data: [t4['健康线']||0, t5['健康线']||0], barWidth: '30%', itemStyle: {{ borderRadius: [4,4,0,0] }} }},
+                {{ name: '兴趣变美线', type: 'bar', data: [t4['兴趣变美线']||0, t5['兴趣变美线']||0], barWidth: '30%', itemStyle: {{ borderRadius: [4,4,0,0] }} }}
             ]
         }});
 
@@ -1202,52 +1357,10 @@ html = f'''<!DOCTYPE html>
             grid: {{ left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true }},
             xAxis: {{ type: 'category', data: wdNames, axisLine: {{ lineStyle: {{ color: colors.outline }} }} }},
             yAxis: {{ type: 'value', splitLine: {{ lineStyle: {{ color: colors.surfaceContainerLow }} }} }},
-            color: [colors.grayMarch, colors.primaryContainer, colors.error],
+            color: [colors.primaryContainer, colors.error],
             series: [
-                {{ name: '3月', type: 'line', data: wdNames.map((_, i) => wd['3月']?.[wdNames[i]] || 0), smooth: true, symbol: 'circle' }},
                 {{ name: '4月', type: 'line', data: wdNames.map((_, i) => wd['4月']?.[wdNames[i]] || 0), smooth: true, symbol: 'circle' }},
                 {{ name: '5月', type: 'line', data: wdNames.map((_, i) => wd['5月']?.[wdNames[i]] || 0), smooth: true, symbol: 'circle' }}
-            ]
-        }});
-
-        // 7. Chat Trend Chart
-        const chatTrendChart = echarts.init(document.getElementById('chatTrendChart'));
-        const dmDays = Array.from({{length: 31}}, (_, i) => `${{i+1}}日`);
-        const dmMar = Object.values(chartsData.daily_dm['3月']);
-        const dmApr = Object.values(chartsData.daily_dm['4月']);
-        const dmMay = Object.values(chartsData.daily_dm['5月']).map((v, i) => i < 15 ? v : null);
-        chatTrendChart.setOption({{
-            tooltip: {{ trigger: 'axis', backgroundColor: '#fff', textStyle: {{ color: '#191c1e' }} }},
-            legend: {{ data: ['3月', '4月', '5月'], bottom: 0 }},
-            grid: {{ left: '3%', right: '4%', bottom: '12%', top: '5%', containLabel: true }},
-            xAxis: {{ type: 'category', boundaryGap: false, data: dmDays, axisLine: {{ lineStyle: {{ color: colors.outline }} }} }},
-            yAxis: {{ type: 'value', splitLine: {{ lineStyle: {{ color: colors.surfaceContainerLow }} }} }},
-            series: [
-                {{
-                    name: '3月', type: 'line', data: dmMar,
-                    itemStyle: {{ color: colors.grayMarch }},
-                    lineStyle: {{ type: 'dashed', width: 2 }},
-                    symbol: 'none'
-                }},
-                {{
-                    name: '4月', type: 'line', data: dmApr,
-                    itemStyle: {{ color: colors.tertiary }},
-                    lineStyle: {{ width: 2 }},
-                    areaStyle: {{
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            {{ offset: 0, color: 'rgba(109, 59, 215, 0.2)' }},
-                            {{ offset: 1, color: 'rgba(109, 59, 215, 0.0)' }}
-                        ])
-                    }},
-                    symbol: 'none'
-                }},
-                {{
-                    name: '5月', type: 'line', data: dmMay,
-                    itemStyle: {{ color: colors.error }},
-                    lineStyle: {{ width: 2 }},
-                    symbol: 'circle',
-                    symbolSize: 6
-                }}
             ]
         }});
 
@@ -1350,11 +1463,10 @@ html = f'''<!DOCTYPE html>
         window.addEventListener('resize', function() {{
             mainTrendChart.resize();
             holidayChart.resize();
-            channelChart.resize();
+            strategyBarChart.resize();
             memberLevelChart.resize();
             teamBarChart.resize();
             weekdayChart.resize();
-            chatTrendChart.resize();
             waterfallChart.resize();
         }});
     }});
@@ -1365,6 +1477,46 @@ html = f'''<!DOCTYPE html>
 
 with open('dashboard.html', 'w', encoding='utf-8') as f:
     f.write(html)
+
+# 自动重排 section 顺序（确保与最新框架一致）
+import re
+with open('dashboard.html', 'r', encoding='utf-8') as f:
+    html_content = f.read()
+
+main_match = re.search(r'(<main.*?>)(.*?)(</main>)', html_content, re.DOTALL)
+if main_match:
+    main_start = main_match.group(1)
+    main_content = main_match.group(2)
+    main_end = main_match.group(3)
+    headers = re.findall(r'<!-- ========== .*? ========== -->', main_content)
+    splits = re.split(r'(<!-- ========== .*? ========== -->)', main_content)
+    blocks = {}
+    current_header = None
+    for part in splits:
+        if part.strip() in headers:
+            current_header = part.strip()
+            blocks[current_header] = part
+        elif current_header:
+            blocks[current_header] += part
+    new_order = [
+        '<!-- ========== 核心归因结论 ========== -->',
+        '<!-- ========== KPIs + 目标追踪 ========== -->',
+        '<!-- ========== 日趋势 + 假期效应 ========== -->',
+        '<!-- ========== 线索变化瀑布图 ========== -->',
+        '<!-- ========== 品类归因卡片 ========== -->',
+        '<!-- ========== 辅助决策建议 ========== -->',
+        '<!-- ========== 排期差异分析 ========== -->',
+        '<!-- ========== 新量策略对比 + 会员等级 ========== -->',
+        '<!-- ========== 团队对比 + 星期几 ========== -->',
+        '<!-- ========== 高价值品类 + 排期关联 ========== -->',
+    ]
+    new_main_content = ''
+    for h in new_order:
+        if h in blocks:
+            new_main_content += blocks[h]
+    new_html = html_content[:main_match.start()] + main_start + new_main_content + main_end + html_content[main_match.end():]
+    with open('dashboard.html', 'w', encoding='utf-8') as f:
+        f.write(new_html)
 
 print("✅ dashboard.html 已生成")
 

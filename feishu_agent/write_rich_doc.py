@@ -131,7 +131,7 @@ def _build_callout_block(text: str, style: str) -> dict:
             "background_color": s["bg"],
             "border_color": s["border"],
             "text_color": s["text"],
-            "elements": elements
+            "text": {"elements": elements}
         }
     }
 

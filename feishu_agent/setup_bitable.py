@@ -63,6 +63,8 @@ FIELDS = [
     {"name": "投手部门", "type": 1},
     {"name": "例子价格", "type": 2},
     {"name": "首单流水", "type": 2},
+    # 新增：区分直播策略类型
+    {"name": "是否新量直播间策略", "type": 3, "property": {"options": [{"name": "是", "color": 0}, {"name": "否", "color": 1}]}},  # 单选：是/否
 ]
 
 # Excel → 飞书字段名映射（大部分相同，只处理特殊情况）
