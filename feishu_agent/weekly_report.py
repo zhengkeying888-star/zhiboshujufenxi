@@ -1019,6 +1019,7 @@ def _set_doc_permission(doc_id: str, doc_type: str = "docx"):
         "--params", json.dumps({"token": doc_id, "type": doc_type}),
         "--data", json.dumps(body),
         "--as", "bot",
+        "--yes",
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
