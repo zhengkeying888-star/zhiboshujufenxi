@@ -368,6 +368,12 @@ def build_schedule_correlation(leads_rows, schedule_rows):
     # 线索数据按月份+品类+日期索引（品类名规范化）
     cart_rows = [r for r in leads_rows if r["三级团队"] == "直播间购物车"]
 
+    # 动态确定同期截止日：取本月购物车线索的最大日期
+    today = datetime.now()
+    curr_cart_days = [r["例子日"] for r in cart_rows
+                      if r["例子时间"].year == today.year and r["例子时间"].month == today.month]
+    cutoff_day = max(curr_cart_days) if curr_cart_days else today.day
+
     # 收集所有品类（规范化后）
     all_cats = set(normalize_category(r["品类名"]) for r in cart_rows if r["品类名"])
     # 移除未规范化的 None
@@ -375,12 +381,12 @@ def build_schedule_correlation(leads_rows, schedule_rows):
 
     results = []
     for cat in all_cats:
-        # 4月线索（1-15号）
+        # 4月线索（1-cutoff_day号）
         apr_leads = sum(1 for r in cart_rows
-                        if normalize_category(r["品类名"]) == cat and r["统计月"] == "4月" and r["例子日"] <= 15)
-        # 5月线索（1-15号）
+                        if normalize_category(r["品类名"]) == cat and r["统计月"] == "4月" and r["例子日"] <= cutoff_day)
+        # 5月线索（1-cutoff_day号）
         may_leads = sum(1 for r in cart_rows
-                        if normalize_category(r["品类名"]) == cat and r["统计月"] == "5月" and r["例子日"] <= 15)
+                        if normalize_category(r["品类名"]) == cat and r["统计月"] == "5月" and r["例子日"] <= cutoff_day)
 
         # 排期场次
         apr_schedule_count = schedule_counts.get("4月", {}).get(cat, 0)
@@ -388,11 +394,11 @@ def build_schedule_correlation(leads_rows, schedule_rows):
 
         # 5月是否排期
         may_scheduled = any(cat in schedule_by_date.get(d, set())
-                            for d in [f"2026-05-{day:02d}" for day in range(1, 16)])
+                            for d in [f"2026-05-{day:02d}" for day in range(1, cutoff_day + 1)])
 
-        # 5月曝光（该品类在5月1-15日所有排期的曝光总和）
+        # 5月曝光（该品类在5月1-cutoff_day日所有排期的曝光总和）
         may_exposure = 0
-        for day in range(1, 16):
+        for day in range(1, cutoff_day + 1):
             d = f"2026-05-{day:02d}"
             if cat in schedule_by_date.get(d, set()):
                 may_exposure += exposure_by_date_cat.get((d, cat), 0)
@@ -489,12 +495,22 @@ def generate_dashboard_data(rows, schedule_rows=None):
         except:
             month_alias[m] = m
 
-    # 1. 购物车/弹幕按月总量
+    # 动态确定同期截止日：取当前月购物车数据的最大日期
+    today = datetime.now()
+    curr_month_key = list(month_alias.keys())[-1] if month_alias else None
+    if curr_month_key:
+        curr_cart_days = [r["例子日"] for r in monthly_rows.get(curr_month_key, [])
+                          if r["三级团队"] == "直播间购物车" and r["例子日"] is not None]
+        cutoff_day = max(curr_cart_days) if curr_cart_days else today.day
+    else:
+        cutoff_day = today.day
+
+    # 1. 购物车/弹幕按月同期总量（与数据更新进度对齐）
     total_stats = {}
     for m, alias in month_alias.items():
         df = monthly_rows[m]
-        cart = [r for r in df if r["三级团队"] == "直播间购物车"]
-        dm = [r for r in df if r["三级团队"] == "直播间弹幕"]
+        cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= cutoff_day]
+        dm = [r for r in df if r["三级团队"] == "直播间弹幕" and r["例子日"] <= cutoff_day]
         total_stats[alias] = {
             "购物车": len(cart),
             "弹幕": len(dm),
@@ -520,11 +536,11 @@ def generate_dashboard_data(rows, schedule_rows=None):
             daily[r["例子日"]] += 1
         daily_dm[alias] = {str(d): int(daily.get(d, 0)) for d in range(1, 32)}
 
-    # 4. 二级团队1-15号同期对比
+    # 4. 二级团队1-cutoff_day号同期对比
     team_compare = {}
     for m, alias in month_alias.items():
         df = monthly_rows[m]
-        cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= 15]
+        cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= cutoff_day]
         team = defaultdict(int)
         for r in cart:
             team[r["二级团队"]] += 1
@@ -537,7 +553,7 @@ def generate_dashboard_data(rows, schedule_rows=None):
 
     for m, alias in month_alias.items():
         df = monthly_rows[m]
-        cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= 15]
+        cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= cutoff_day]
         for r in cart:
             cat = r["品类名"]
             team = r["二级团队"]
@@ -549,7 +565,7 @@ def generate_dashboard_data(rows, schedule_rows=None):
         counts = {}
         for m, alias in month_alias.items():
             df = monthly_rows[m]
-            cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= 15]
+            cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= cutoff_day]
             cnt = len([r for r in cart if r["品类名"] == cat])
             counts[alias] = cnt
 
@@ -693,14 +709,13 @@ def generate_dashboard_data(rows, schedule_rows=None):
     LTV_FORECAST = 76.74      # 当前预测LTV（业务系统实时值，月底预计涨至90+）
     curr_month_key = list(month_alias.keys())[-1]
     curr_month_alias = month_alias[curr_month_key]
-    # 当月1号到今天（实时）
-    today_day = datetime.now().day
+    # 当月1号到cutoff_day（同期口径，与数据更新进度对齐）
     may_cart_1_today = len([r for r in monthly_rows.get(curr_month_key, [])
-                            if r["三级团队"] == "直播间购物车" and r["例子日"] <= today_day])
+                            if r["三级团队"] == "直播间购物车" and r["例子日"] <= cutoff_day])
     target_clues = round(REVENUE_TARGET / LTV_FORECAST)
     achievement = round(may_cart_1_today / target_clues * 100, 1) if target_clues > 0 else 0
     gap = target_clues - may_cart_1_today
-    daily_avg = round(may_cart_1_today / today_day, 1) if today_day > 0 else 0
+    daily_avg = round(may_cart_1_today / cutoff_day, 1) if cutoff_day > 0 else 0
     projected = round(daily_avg * 31, 1)
     projected_pct = round(projected / target_clues * 100, 1) if target_clues > 0 else 0
     est_revenue = round(may_cart_1_today * LTV_FORECAST, 0)
@@ -709,7 +724,7 @@ def generate_dashboard_data(rows, schedule_rows=None):
         "流水目标": REVENUE_TARGET,
         "预测LTV": LTV_FORECAST,
         "购物车线索目标": target_clues,
-        f"当前线索(1-{today_day}日)": may_cart_1_today,
+        f"当前线索(1-{cutoff_day}日)": may_cart_1_today,
         "达成率": achievement,
         "缺口": gap,
         "日均": daily_avg,
@@ -765,15 +780,15 @@ def generate_dashboard_data(rows, schedule_rows=None):
         curr_cart = [r for r in monthly_rows.get(list(month_alias.keys())[-1], []) if r["三级团队"] == "直播间购物车"]
 
         prev_holiday = len([r for r in prev_cart if 1 <= r["例子日"] <= 5])
-        prev_normal = len([r for r in prev_cart if 6 <= r["例子日"] <= 15])
+        prev_normal = len([r for r in prev_cart if 6 <= r["例子日"] <= cutoff_day])
         curr_holiday = len([r for r in curr_cart if 1 <= r["例子日"] <= 5])
-        curr_normal = len([r for r in curr_cart if 6 <= r["例子日"] <= 15])
+        curr_normal = len([r for r in curr_cart if 6 <= r["例子日"] <= cutoff_day])
 
         holiday_effect["counts"] = {
             f"{m_prev}假期(1-5)": prev_holiday,
-            f"{m_prev}平日(6-15)": prev_normal,
+            f"{m_prev}平日(6-{cutoff_day})": prev_normal,
             f"{m_curr}假期(1-5)": curr_holiday,
-            f"{m_curr}平日(6-15)": curr_normal,
+            f"{m_curr}平日(6-{cutoff_day})": curr_normal,
         }
         if prev_holiday > 0:
             holiday_effect["holiday_drop"] = round((curr_holiday - prev_holiday) / prev_holiday * 100, 1)
@@ -814,11 +829,11 @@ def generate_dashboard_data(rows, schedule_rows=None):
     if schedule_correlation:
         data["schedule_correlation"] = schedule_correlation
 
-    # 15. 购物车新量策略拆分（按月）
+    # 15. 购物车新量策略拆分（同期口径）
     cart_stats_by_strategy = {}
     for m, alias in month_alias.items():
         df = monthly_rows[m]
-        cart = [r for r in df if r["三级团队"] == "直播间购物车"]
+        cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= cutoff_day]
         yes_cnt = len([r for r in cart if str(r.get("是否新量直播间策略", "")).strip() == "是"])
         no_cnt = len([r for r in cart if str(r.get("是否新量直播间策略", "")).strip() == "否"])
         cart_stats_by_strategy[alias] = {
@@ -832,7 +847,7 @@ def generate_dashboard_data(rows, schedule_rows=None):
     cat_team_map_strategy = {}
     for m, alias in month_alias.items():
         df = monthly_rows[m]
-        cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= 15]
+        cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= cutoff_day]
         for r in cart:
             cat = r["品类名"]
             team = r["二级团队"]
@@ -846,7 +861,7 @@ def generate_dashboard_data(rows, schedule_rows=None):
             counts = {}
             for m, alias in month_alias.items():
                 df = monthly_rows[m]
-                cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= 15]
+                cart = [r for r in df if r["三级团队"] == "直播间购物车" and r["例子日"] <= cutoff_day]
                 cnt = len([r for r in cart if r["品类名"] == cat and str(r.get("是否新量直播间策略", "")).strip() == strategy])
                 counts[alias] = cnt
             c4 = counts.get("4月", 0)

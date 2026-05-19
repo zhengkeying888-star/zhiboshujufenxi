@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 EXCEL_FILES = {
     "3月": os.path.join(BASE_DIR, "3月直播间数据分析.xlsx"),
     "4月": os.path.join(BASE_DIR, "4月直播间数据分析.xlsx"),
-    "5月": os.path.join(BASE_DIR, "5月直播间数据分析.xlsx"),
+    "5月": os.path.join(BASE_DIR, "直播间5月19日数据分析.xlsx"),
 }
 SCHEDULE_FILE = os.path.join(BASE_DIR, "../直播间排期策略/平台私域直播线宣发排期（新）.xlsx")
 DETAIL_FILE = os.path.join(BASE_DIR, "直播明细表（仅供参考）.xlsx")
@@ -869,17 +869,18 @@ def build_dashboard_data(df_all, cat_analysis, member_analysis, channel_analysis
     crashed_cats_names = [c["品类"] for c in cat_analysis["core_answer"].get("crashed_cats_detail", [])]
     data["core_answer"]["crashed_cats_names"] = crashed_cats_names
 
-    # 保留 generate_data.py 生成的关键字段（策略归因、排期关联等）
-    preserve_keys = [
+    # 强制保留 generate_data.py 生成的基础统计字段（避免数据源不一致被覆盖）
+    force_preserve_keys = [
+        "total_stats", "daily_cart", "daily_dm", "team_compare",
         "cart_stats_by_strategy", "cat_data_by_strategy",
         "schedule_correlation_main", "schedule_compare",
         "daily_stats", "team_stats", "channel_stats",
         "target_month", "current_month_label", "last_month_label",
     ]
-    for key in preserve_keys:
-        if key in existing_data and key not in data:
+    for key in force_preserve_keys:
+        if key in existing_data:
             data[key] = existing_data[key]
-            print(f"   ♻️ 保留已有字段: {key}")
+            print(f"   ♻️ 强制保留已有字段: {key}")
 
     with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)

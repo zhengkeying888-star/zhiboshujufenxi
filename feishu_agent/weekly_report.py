@@ -461,25 +461,31 @@ def generate_weekly_report_xml(recent_records: list, deep_data: dict) -> list:
     """生成周报 XML，返回 [(章节标识, xml_content), ...]"""
     today = datetime.now()
 
+    # 动态确定同期截止日：取本月实际数据的最大日期（与数据更新进度对齐）
+    this_month_records = [r for r in recent_records
+                          if r["date"].month == today.month and r["date"].year == today.year]
+    cutoff_day = max((r["date"].day for r in this_month_records), default=today.day)
+
     # 同期日期范围（重置时间分量，避免当天小时过滤掉月初记录）
     this_month_start = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    this_month_end = (this_month_start + timedelta(days=cutoff_day - 1)).replace(hour=23, minute=59, second=59, microsecond=999999)
     last_month_end = this_month_start - timedelta(days=1)
     last_month_start = last_month_end.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    last_month_same_day = (last_month_start + timedelta(days=today.day - 1)).replace(hour=23, minute=59, second=59, microsecond=999999)
+    last_month_same_day = (last_month_start + timedelta(days=cutoff_day - 1)).replace(hour=23, minute=59, second=59, microsecond=999999)
 
-    this_month_label = f"{today.month}月1-{today.day}日"
-    last_month_label = f"{last_month_end.month}月1-{today.day}日"
+    this_month_label = f"{today.month}月1-{cutoff_day}日"
+    last_month_label = f"{last_month_end.month}月1-{cutoff_day}日"
 
     # 全部（购物车口径）
-    this_cart, this_dm, cat_this, team_this = _sum_by_period(recent_records, this_month_start, today)
+    this_cart, this_dm, cat_this, team_this = _sum_by_period(recent_records, this_month_start, this_month_end)
     last_cart, last_dm, cat_last, team_last = _sum_by_period(recent_records, last_month_start, last_month_same_day)
 
     # 新量（是）
-    this_cart_y, this_dm_y, cat_this_y, team_this_y = _sum_by_period(recent_records, this_month_start, today, "是")
+    this_cart_y, this_dm_y, cat_this_y, team_this_y = _sum_by_period(recent_records, this_month_start, this_month_end, "是")
     last_cart_y, last_dm_y, cat_last_y, team_last_y = _sum_by_period(recent_records, last_month_start, last_month_same_day, "是")
 
     # 非新量（否）
-    this_cart_n, this_dm_n, cat_this_n, team_this_n = _sum_by_period(recent_records, this_month_start, today, "否")
+    this_cart_n, this_dm_n, cat_this_n, team_this_n = _sum_by_period(recent_records, this_month_start, this_month_end, "否")
     last_cart_n, last_dm_n, cat_last_n, team_last_n = _sum_by_period(recent_records, last_month_start, last_month_same_day, "否")
 
     # 动态 LTV
@@ -503,7 +509,7 @@ def generate_weekly_report_xml(recent_records: list, deep_data: dict) -> list:
     target_clues = round(revenue_target / ltv_forecast)  # ≈ 9278
     current_clues = this_cart
     achievement = round(current_clues / target_clues * 100, 1) if target_clues > 0 else 0
-    daily_avg = round(current_clues / today.day, 1) if today.day > 0 else 0
+    daily_avg = round(current_clues / cutoff_day, 1) if cutoff_day > 0 else 0
     projected_clues = round(daily_avg * 31, 1)
     projected_pct = round(projected_clues / target_clues * 100, 1) if target_clues > 0 else 0
     est_revenue = round(current_clues * ltv_forecast, 0)
@@ -758,10 +764,16 @@ def generate_report_charts(recent_records, deep_data):
     chart_images = []
     today = datetime.now()
 
+    # 动态确定同期截止日
+    this_month_records = [r for r in recent_records
+                          if r["date"].month == today.month and r["date"].year == today.year]
+    cutoff_day = max((r["date"].day for r in this_month_records), default=today.day)
+
     this_month_start = today.replace(day=1)
+    this_month_end = this_month_start + timedelta(days=cutoff_day - 1)
     last_month_end = this_month_start - timedelta(days=1)
     last_month_start = last_month_end.replace(day=1)
-    last_month_same_day = last_month_start + timedelta(days=today.day - 1)
+    last_month_same_day = last_month_start + timedelta(days=cutoff_day - 1)
 
     # ---------- 图表1: 策略构成饼图（4月 vs 5月） ----------
     cart_stats = deep_data.get("cart_stats_by_strategy", {})
@@ -933,7 +945,7 @@ def generate_report_charts(recent_records, deep_data):
     cat_last_m = defaultdict(int)
     for r in recent_records:
         d = r["date"]
-        if this_month_start <= d <= today:
+        if this_month_start <= d <= this_month_end:
             cat_this_m[r["cat"]] += r["clue_count"]
         elif last_month_start <= d <= last_month_same_day:
             cat_last_m[r["cat"]] += r["clue_count"]
@@ -973,7 +985,7 @@ def generate_report_charts(recent_records, deep_data):
         }});
         CHART_INSTANCES.push(chart);
         '''
-        png_path = _build_and_screenshot("同期品类变化 TOP10", f"{today.month}月1-{today.day}日 vs {last_month_end.month}月同期", body_html, chart_js, "cat-changes-monthly")
+        png_path = _build_and_screenshot("同期品类变化 TOP10", f"{today.month}月1-{cutoff_day}日 vs {last_month_end.month}月同期", body_html, chart_js, "cat-changes-monthly")
         if png_path:
             chart_images.append(("同期品类变化 TOP10", png_path))
 

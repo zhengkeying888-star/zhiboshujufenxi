@@ -1,27 +1,27 @@
 <title>直播间线索周报</title>
 <callout emoji="ℹ️" background-color="light-blue" border-color="blue">
-  <p>同期对比：4月1-19日 vs 5月1-19日 | 生成时间：2026-05-19 12:57 | 口径：线索数（条） | 上月LTV≈¥96.9</p>
+  <p>同期对比：4月1-18日 vs 5月1-18日 | 生成时间：2026-05-19 14:00 | 口径：线索数（条） | 上月LTV≈¥96.9</p>
 </callout>
 <h1>一、总体指标</h1>
 <callout emoji="🔴" background-color="light-red" border-color="red">
-  <p>5月1-19日 较 4月1-19日 购物车线索下跌 974 条（-17.7%），主因：头部品类塌方 + 假期冲击。</p>
+  <p>5月1-18日 较 4月1-18日 购物车线索下跌 804 条（-15.1%），主因：头部品类塌方 + 假期冲击。</p>
 </callout>
 
 <grid>
   <column width-ratio="0.25">
     <p><b>🛒 购物车线索</b></p>
     <p><span text-color="red">4,526</span></p>
-    <p>环比 <span text-color="red">-17.7%</span></p>
+    <p>环比 <span text-color="red">-15.1%</span></p>
   </column>
   <column width-ratio="0.25">
     <p><b>🆕 新量策略</b></p>
     <p><span text-color="red">1,309</span></p>
-    <p>占比 28.9%（4月 15.1%）</p>
+    <p>占比 28.9%（4月 12.7%）</p>
   </column>
   <column width-ratio="0.25">
     <p><b>📉 非新量策略</b></p>
     <p>3,217</p>
-    <p>环比 -34.1%</p>
+    <p>环比 -31.8%</p>
   </column>
   <column width-ratio="0.25">
     <p><b>💰 预估流水</b></p>
@@ -43,7 +43,7 @@
   </column>
   <column width-ratio="0.25">
     <p><b>🔮 月底预测</b></p>
-    <p>7,384 (63.0%)</p>
+    <p>7,793 (66.5%)</p>
   </column>
   <column width-ratio="0.25">
     <p><b>💰 预估流水</b></p>
@@ -57,14 +57,14 @@
   <thead>
     <tr>
       <th background-color="light-gray">线级</th>
-      <th background-color="light-gray">4月1-19日</th>
-      <th background-color="light-gray">5月1-19日</th>
+      <th background-color="light-gray">4月1-18日</th>
+      <th background-color="light-gray">5月1-18日</th>
       <th background-color="light-gray">环比</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td>健康线</td><td>2,000</td><td>1,524</td><td><span text-color="red">-23.8%</span></td></tr>
-    <tr><td>兴趣变美线</td><td>3,500</td><td>3,002</td><td><span text-color="red">-14.2%</span></td></tr>
+    <tr><td>健康线</td><td>1,919</td><td>1,524</td><td><span text-color="red">-20.6%</span></td></tr>
+    <tr><td>兴趣变美线</td><td>3,411</td><td>3,002</td><td><span text-color="red">-12.0%</span></td></tr>
   </tbody>
 </table>
 <h1>三、构成拆分（正常排期+新用户策略，同期环比）</h1>
@@ -83,26 +83,26 @@
   <tbody>
     <tr>
       <td>新量策略（是）</td>
-      <td>1,543</td>
-      <td>15.1%</td>
+      <td>857</td>
+      <td>12.7%</td>
       <td>1,309</td>
       <td>28.9%</td>
-      <td><span text-color="red">-15.2%</span></td>
+      <td><span text-color="red">+52.7%</span></td>
     </tr>
     <tr>
       <td>非新量策略（否）</td>
-      <td>8,650</td>
-      <td>84.9%</td>
+      <td>5,901</td>
+      <td>87.3%</td>
       <td>3,217</td>
       <td>71.1%</td>
-      <td><span text-color="red">-62.8%</span></td>
+      <td><span text-color="red">-45.5%</span></td>
     </tr>
   </tbody>
 </table>
 <h1>四、目标差距分析 归因123</h1>
 
 <callout emoji="📉" background-color="light-red" border-color="red">
-  <p><b>总跌幅 974 条（-17.7%）</b>，三大归因拆解如下：</p>
+  <p><b>总跌幅 804 条（-15.1%）</b>，三大归因拆解如下：</p>
 </callout>
 
 <h2>归因1：假期冲击</h2>
@@ -112,12 +112,12 @@
 
 <h2>归因2：头部品类塌方</h2>
 <callout emoji="🔴" background-color="light-red" border-color="red">
-  <p>TOP3 暴跌品类（一杰瑜伽、气血、中医瑜伽）共流失 926 条线索，贡献总跌幅的 <b>30.6%</b>。</p>
+  <p>TOP3 暴跌品类（一杰瑜伽、气血、中医瑜伽）共流失 887 条线索，贡献总跌幅的 <b>39.7%</b>。</p>
 </callout>
 
 <h2>归因3：高价值用户流失</h2>
 <callout emoji="👥" background-color="light-yellow" border-color="yellow">
-  <p>V7-V10 高价值用户占比从 17.8% 降至 12.3%（跌 5.5pp），新用户占比从 50.6% 升至 59.9%（升 9.3pp），用户结构恶化拉低整体LTV。</p>
+  <p>V7-V10 高价值用户占比从 17.8% 降至 11.8%（跌 6.0pp），新用户占比从 50.6% 升至 60.3%（升 9.7pp），用户结构恶化拉低整体LTV。</p>
 </callout>
 <h1>五、品类后链路分析</h1>
 
@@ -399,16 +399,16 @@
 
 <h2>核心行动</h2>
 <checkbox done="false">追回假期缺口：评估加场/加大宣发追回约1,172条线索</checkbox>
-<checkbox done="false">高价值用户召回：V7-V10占比降至12.3%，建议老岛主专属直播或社群专属场次</checkbox>
+<checkbox done="false">高价值用户召回：V7-V10占比降至11.8%，建议老岛主专属直播或社群专属场次</checkbox>
 <checkbox done="false">头部品类复播：气血、中医瑜伽等LTV&gt;150品类尽快恢复排期</checkbox>
 
 <h2>下月启示（6月110万目标）</h2>
 <callout emoji="⚠️" background-color="light-yellow" border-color="yellow">
-  <p>6月目标流水 110 万，较5月（90万）上调 22.2%。当前线索预估完成率 63.0%，若趋势延续缺口将进一步扩大。</p>
+  <p>6月目标流水 110 万，较5月（90万）上调 22.2%。当前线索预估完成率 66.5%，若趋势延续缺口将进一步扩大。</p>
 </callout>
 <ul>
   <li><span text-color="red">🔴 品类断层：</span>气血、中医瑜伽等LTV&gt;150品类若持续低排期，6月流水目标难以达成</li>
-  <li><span text-color="yellow">🟡 用户结构：</span>新用户占比过高（59.9%）将拉低整体LTV，需平衡拉新与召回</li>
+  <li><span text-color="yellow">🟡 用户结构：</span>新用户占比过高（60.3%）将拉低整体LTV，需平衡拉新与召回</li>
   <li><span text-color="yellow">🟡 季节性：</span>6月中下旬暑期，健康线品类可能受出行影响</li>
 </ul>
 
