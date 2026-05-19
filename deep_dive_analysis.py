@@ -21,6 +21,8 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 
 # ============ 配置 ============
+# 同期对比截止日（5月数据更新到18号，4月同期也取1-18号）
+CUTOFF_DAY = 18
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 EXCEL_FILES = {
     "3月": os.path.join(BASE_DIR, "3月直播间数据分析.xlsx"),
@@ -149,12 +151,8 @@ def analyze_category_trends(df_all):
     cat_monthly = []
     for month in ["3月", "4月", "5月"]:
         m_df = cart_df[cart_df["月份"] == month]
-        # 只取1-15号做同期对比
-        if month == "5月":
-            m_df = m_df[m_df["day"] <= 15]
-        else:
-            # 3/4月也取1-15号做公平对比
-            m_df = m_df[m_df["day"] <= 15]
+        # 只取1-CUTOFF_DAY号做同期对比
+        m_df = m_df[m_df["day"] <= CUTOFF_DAY]
 
         for cat in m_df["品类_norm"].dropna().unique():
             sub = m_df[m_df["品类_norm"] == cat]
@@ -344,10 +342,7 @@ def analyze_member_levels(df_all):
     results = {}
     for month in ["3月", "4月", "5月"]:
         m_df = cart_df[cart_df["月份"] == month]
-        if month == "5月":
-            m_df = m_df[m_df["day"] <= 15]
-        else:
-            m_df = m_df[m_df["day"] <= 15]
+        m_df = m_df[m_df["day"] <= CUTOFF_DAY]
 
         total = len(m_df)
         groups = m_df["等级分组"].value_counts().to_dict()
@@ -378,10 +373,7 @@ def analyze_channel_trends(df_all):
     results = {}
     for month in ["3月", "4月", "5月"]:
         m_df = df_all[df_all["月份"] == month]
-        if month == "5月":
-            m_df = m_df[m_df["day"] <= 15]
-        else:
-            m_df = m_df[m_df["day"] <= 15]
+        m_df = m_df[m_df["day"] <= CUTOFF_DAY]
 
         cart = len(m_df[m_df["三级团队"] == "直播间购物车"])
         dm = len(m_df[m_df["三级团队"] == "直播间弹幕"])
@@ -400,7 +392,7 @@ def analyze_channel_trends(df_all):
     print(f"   弹幕: 4月{dm_4} → 5月{dm_5} ({dm_change}%)")
 
     # 判断是否同比例跌
-    same_trend = abs(cart_change - dm_change) <= 15
+    same_trend = abs(cart_change - dm_change) <= CUTOFF_DAY
     print(f"   同比例下跌: {same_trend}")
 
     return {
@@ -419,11 +411,11 @@ def analyze_holiday_effect(df_all):
 
     # 劳动节 5月1-5日
     may_holiday = cart_df[(cart_df["月份"] == "5月") & (cart_df["day"] <= 5)]
-    may_normal = cart_df[(cart_df["月份"] == "5月") & (cart_df["day"] > 5) & (cart_df["day"] <= 15)]
+    may_normal = cart_df[(cart_df["月份"] == "5月") & (cart_df["day"] > 5) & (cart_df["day"] <= CUTOFF_DAY)]
 
     # 4月同期（4月1-5日 vs 4月6-15日）
     apr_holiday = cart_df[(cart_df["月份"] == "4月") & (cart_df["day"] <= 5)]
-    apr_normal = cart_df[(cart_df["月份"] == "4月") & (cart_df["day"] > 5) & (cart_df["day"] <= 15)]
+    apr_normal = cart_df[(cart_df["月份"] == "4月") & (cart_df["day"] > 5) & (cart_df["day"] <= CUTOFF_DAY)]
 
     results = {
         "4月假期(1-5)": len(apr_holiday),
@@ -466,10 +458,7 @@ def analyze_weekday_pattern(df_all):
 
     for month in ["3月", "4月", "5月"]:
         m_df = cart_df[cart_df["月份"] == month]
-        if month == "5月":
-            m_df = m_df[m_df["day"] <= 15]
-        else:
-            m_df = m_df[m_df["day"] <= 15]
+        m_df = m_df[m_df["day"] <= CUTOFF_DAY]
 
         wd_counts = m_df["weekday"].value_counts().sort_index().to_dict()
         results[month] = {weekdays[i]: int(wd_counts.get(i, 0)) for i in range(7)}
@@ -504,10 +493,7 @@ def analyze_member_category_cross(df_all):
     results = []
     for month in ["4月", "5月"]:
         m_df = cart_df[cart_df["月份"] == month]
-        if month == "5月":
-            m_df = m_df[m_df["day"] <= 15]
-        else:
-            m_df = m_df[m_df["day"] <= 15]
+        m_df = m_df[m_df["day"] <= CUTOFF_DAY]
 
         for cat in m_df["品类_norm"].dropna().unique():
             sub = m_df[m_df["品类_norm"] == cat]
@@ -690,10 +676,10 @@ def analyze_schedule_correlation(df_all, schedule_by_date, exposure_by_date, sch
     for cat in all_cats:
         # 4月线索
         apr_leads = sum(1 for _, r in cart_df.iterrows()
-                        if r["品类_norm"] == cat and r["月份"] == "4月" and r["day"] <= 15)
+                        if r["品类_norm"] == cat and r["月份"] == "4月" and r["day"] <= CUTOFF_DAY)
         # 5月线索
         may_leads = sum(1 for _, r in cart_df.iterrows()
-                        if r["品类_norm"] == cat and r["月份"] == "5月" and r["day"] <= 15)
+                        if r["品类_norm"] == cat and r["月份"] == "5月" and r["day"] <= CUTOFF_DAY)
 
         # 4月排期场次 vs 5月排期场次（从排期表统计）
         apr_schedule_count = schedule_counts.get("4月", {}).get(cat, 0)
@@ -701,11 +687,11 @@ def analyze_schedule_correlation(df_all, schedule_by_date, exposure_by_date, sch
 
         # 5月是否排期
         may_scheduled = any(cat in schedule_by_date.get(d, set())
-                            for d in [f"2026-05-{day:02d}" for day in range(1, 16)])
+                            for d in [f"2026-05-{day:02d}" for day in range(1, CUTOFF_DAY + 1)])
 
         # 曝光（简化：取该品类在5月所有排期的曝光总和）
         may_exposure = sum(exposure_by_date.get(d, 0)
-                           for d in [f"2026-05-{day:02d}" for day in range(1, 16)]
+                           for d in [f"2026-05-{day:02d}" for day in range(1, CUTOFF_DAY + 1)]
                            if cat in schedule_by_date.get(d, set()))
 
         # 转化率
@@ -789,8 +775,8 @@ def build_dashboard_data(df_all, cat_analysis, member_analysis, channel_analysis
     team_compare = {}
 
     for m in months:
-        m_cart = cart_df[(cart_df["月份"] == m) & (cart_df["day"] <= 15)]
-        m_dm = dm_df[(dm_df["月份"] == m) & (dm_df["day"] <= 15)]
+        m_cart = cart_df[(cart_df["月份"] == m) & (cart_df["day"] <= CUTOFF_DAY)]
+        m_dm = dm_df[(dm_df["月份"] == m) & (dm_df["day"] <= CUTOFF_DAY)]
 
         total_stats[m] = {
             "购物车": len(m_cart),
@@ -800,7 +786,7 @@ def build_dashboard_data(df_all, cat_analysis, member_analysis, channel_analysis
         # 日趋势
         daily_cart[m] = {}
         daily_dm[m] = {}
-        for d in range(1, 16):
+        for d in range(1, CUTOFF_DAY + 1):
             daily_cart[m][str(d)] = len(m_cart[m_cart["day"] == d])
             daily_dm[m][str(d)] = len(m_dm[m_dm["day"] == d])
 
@@ -825,12 +811,22 @@ def build_dashboard_data(df_all, cat_analysis, member_analysis, channel_analysis
     achievement = round(may_cart / target * 100, 1)
     gap = target - may_cart
     # 按当前pace预测月底
-    daily_avg = may_cart / 15
+    daily_avg = may_cart / CUTOFF_DAY
     projected = daily_avg * 31
     projected_pct = round(projected / target * 100, 1)
 
     # 流水预测（按4月LTV 95倒推）
     projected_gmv = projected * 95
+
+    # 增量更新：先读取已有 dashboard_data.json（保留 generate_data.py 生成的字段）
+    existing_data = {}
+    if os.path.exists(OUTPUT_JSON):
+        try:
+            with open(OUTPUT_JSON, "r", encoding="utf-8") as f:
+                existing_data = json.load(f)
+            print(f"   📖 读取已有 {OUTPUT_JSON}，保留原字段")
+        except Exception as e:
+            print(f"   ⚠️ 读取已有 JSON 失败: {e}")
 
     data = {
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
@@ -850,7 +846,7 @@ def build_dashboard_data(df_all, cat_analysis, member_analysis, channel_analysis
         "schedule_correlation": schedule_analysis,
         "target_tracking": {
             "5月购物车目标": target,
-            "5月当前(1-15)": may_cart,
+            f"5月当前(1-{CUTOFF_DAY})": may_cart,
             "达成率": achievement,
             "缺口": gap,
             "日均": round(daily_avg, 0),
@@ -872,6 +868,18 @@ def build_dashboard_data(df_all, cat_analysis, member_analysis, channel_analysis
     # 在 core_answer 中补充暴跌品类名称列表
     crashed_cats_names = [c["品类"] for c in cat_analysis["core_answer"].get("crashed_cats_detail", [])]
     data["core_answer"]["crashed_cats_names"] = crashed_cats_names
+
+    # 保留 generate_data.py 生成的关键字段（策略归因、排期关联等）
+    preserve_keys = [
+        "cart_stats_by_strategy", "cat_data_by_strategy",
+        "schedule_correlation_main", "schedule_compare",
+        "daily_stats", "team_stats", "channel_stats",
+        "target_month", "current_month_label", "last_month_label",
+    ]
+    for key in preserve_keys:
+        if key in existing_data and key not in data:
+            data[key] = existing_data[key]
+            print(f"   ♻️ 保留已有字段: {key}")
 
     with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)

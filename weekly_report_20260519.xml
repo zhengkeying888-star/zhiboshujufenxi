@@ -1,0 +1,416 @@
+<title>直播间线索周报</title>
+<callout emoji="ℹ️" background-color="light-blue" border-color="blue">
+  <p>同期对比：4月1-19日 vs 5月1-19日 | 生成时间：2026-05-19 12:57 | 口径：线索数（条） | 上月LTV≈¥96.9</p>
+</callout>
+<h1>一、总体指标</h1>
+<callout emoji="🔴" background-color="light-red" border-color="red">
+  <p>5月1-19日 较 4月1-19日 购物车线索下跌 974 条（-17.7%），主因：头部品类塌方 + 假期冲击。</p>
+</callout>
+
+<grid>
+  <column width-ratio="0.25">
+    <p><b>🛒 购物车线索</b></p>
+    <p><span text-color="red">4,526</span></p>
+    <p>环比 <span text-color="red">-17.7%</span></p>
+  </column>
+  <column width-ratio="0.25">
+    <p><b>🆕 新量策略</b></p>
+    <p><span text-color="red">1,309</span></p>
+    <p>占比 28.9%（4月 15.1%）</p>
+  </column>
+  <column width-ratio="0.25">
+    <p><b>📉 非新量策略</b></p>
+    <p>3,217</p>
+    <p>环比 -34.1%</p>
+  </column>
+  <column width-ratio="0.25">
+    <p><b>💰 预估流水</b></p>
+    <p><span text-color="red">34.7万</span></p>
+    <p>按LTV¥76.74估算</p>
+  </column>
+</grid>
+<h1>二、目标进度-总</h1>
+
+<grid>
+  <column width-ratio="0.25">
+    <p><b>🎯 5月线索目标</b></p>
+    <p>11,728</p>
+    <p>按LTV¥76.74反推</p>
+  </column>
+  <column width-ratio="0.25">
+    <p><b>📍 当前进度</b></p>
+    <p><span text-color="red">4,526 (38.6%)</span></p>
+  </column>
+  <column width-ratio="0.25">
+    <p><b>🔮 月底预测</b></p>
+    <p>7,384 (63.0%)</p>
+  </column>
+  <column width-ratio="0.25">
+    <p><b>💰 预估流水</b></p>
+    <p><span text-color="red">34.7万</span></p>
+    <p>目标 90.0万</p>
+  </column>
+</grid>
+
+<h2>分线级同期对比</h2>
+<table>
+  <thead>
+    <tr>
+      <th background-color="light-gray">线级</th>
+      <th background-color="light-gray">4月1-19日</th>
+      <th background-color="light-gray">5月1-19日</th>
+      <th background-color="light-gray">环比</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>健康线</td><td>2,000</td><td>1,524</td><td><span text-color="red">-23.8%</span></td></tr>
+    <tr><td>兴趣变美线</td><td>3,500</td><td>3,002</td><td><span text-color="red">-14.2%</span></td></tr>
+  </tbody>
+</table>
+<h1>三、构成拆分（正常排期+新用户策略，同期环比）</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th background-color="light-gray">策略</th>
+      <th background-color="light-gray">4月线索</th>
+      <th background-color="light-gray">4月占比</th>
+      <th background-color="light-gray">5月线索</th>
+      <th background-color="light-gray">5月占比</th>
+      <th background-color="light-gray">环比</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>新量策略（是）</td>
+      <td>1,543</td>
+      <td>15.1%</td>
+      <td>1,309</td>
+      <td>28.9%</td>
+      <td><span text-color="red">-15.2%</span></td>
+    </tr>
+    <tr>
+      <td>非新量策略（否）</td>
+      <td>8,650</td>
+      <td>84.9%</td>
+      <td>3,217</td>
+      <td>71.1%</td>
+      <td><span text-color="red">-62.8%</span></td>
+    </tr>
+  </tbody>
+</table>
+<h1>四、目标差距分析 归因123</h1>
+
+<callout emoji="📉" background-color="light-red" border-color="red">
+  <p><b>总跌幅 974 条（-17.7%）</b>，三大归因拆解如下：</p>
+</callout>
+
+<h2>归因1：假期冲击</h2>
+<callout emoji="🏖️" background-color="light-yellow" border-color="yellow">
+  <p>劳动节假期（1-5日）购物车线索从 1,535 条跌至 529 条，跌幅 <b>-65.5%</b>，直接影响约 1,006 条线索。</p>
+</callout>
+
+<h2>归因2：头部品类塌方</h2>
+<callout emoji="🔴" background-color="light-red" border-color="red">
+  <p>TOP3 暴跌品类（一杰瑜伽、气血、中医瑜伽）共流失 926 条线索，贡献总跌幅的 <b>30.6%</b>。</p>
+</callout>
+
+<h2>归因3：高价值用户流失</h2>
+<callout emoji="👥" background-color="light-yellow" border-color="yellow">
+  <p>V7-V10 高价值用户占比从 17.8% 降至 12.3%（跌 5.5pp），新用户占比从 50.6% 升至 59.9%（升 9.3pp），用户结构恶化拉低整体LTV。</p>
+</callout>
+<h1>五、品类后链路分析</h1>
+
+<callout emoji="🔴" background-color="light-red" border-color="red">
+  <p><b>过程指标恶化预警（5月 vs 4月）</b></p>
+  <ul>
+    <li>古法居家养生：完课率 38.9%→20.8%（-46.7pp），线索265条</li>
+    <li>君合太极：完课率 41.7%→35.4%（-15.1pp），线索277条</li>
+    <li>摄影美学：进群率 82.5%→65.9%（-20.2pp），线索586条</li>
+    <li>道家睡眠：完课率 41.9%→34.3%（-18.1pp），线索466条</li>
+  </ul>
+</callout>
+
+<h2>正式品漏斗趋势</h2>
+<table>
+  <thead>
+    <tr>
+      <th background-color="light-gray">月份</th>
+      <th background-color="light-gray">好友率</th>
+      <th background-color="light-gray">进群率</th>
+      <th background-color="light-gray">先导课到课率</th>
+      <th background-color="light-gray">首课到课率</th>
+      <th background-color="light-gray">首课完课率</th>
+      <th background-color="light-gray">综合转化率</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>03月</td>
+      <td>77.1%</td>
+      <td>66.2%</td>
+      <td>66.2%</td>
+      <td>65.4%</td>
+      <td>54.3%</td>
+      <td><b>6.16%</b></td>
+    </tr>
+    <tr>
+      <td>04月</td>
+      <td>78.6%</td>
+      <td>66.5%</td>
+      <td>69.3%</td>
+      <td>68.7%</td>
+      <td>57.5%</td>
+      <td><b>8.31%</b></td>
+    </tr>
+    <tr>
+      <td>05月</td>
+      <td>78.9%</td>
+      <td>63.2%</td>
+      <td>66.3%</td>
+      <td>64.5%</td>
+      <td>51.7%</td>
+      <td><b>2.95%</b></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><b>关键发现：</b>5月正式品<strong>完课率</strong>较4月下降 5.8pp，是漏斗中恶化最严重的环节；其次为进群率（下降3.3pp）。首单流水因结算周期尚未完全体现，当前重点监控过程指标。</p>
+
+<h2>正式品后链路（5月 vs 4月）</h2>
+<table>
+  <thead>
+    <tr>
+      <th background-color="light-gray">品类</th>
+      <th background-color="light-gray">4月线索</th>
+      <th background-color="light-gray">5月线索</th>
+      <th background-color="light-gray">好友率环比</th>
+      <th background-color="light-gray">进群率环比</th>
+      <th background-color="light-gray">到课率环比</th>
+      <th background-color="light-gray">完课率环比</th>
+      <th background-color="light-gray">转化率环比</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>摄影美学</td>
+      <td>1663</td>
+      <td>586</td>
+      <td class="text-secondary">+4.9%</td>
+      <td class="text-error">-20.2%</td>
+      <td class="text-tertiary">-0.4%</td>
+      <td class="text-secondary">+0.7%</td>
+      <td class="text-error">-86.2%</td>
+    </tr>
+    <tr>
+      <td>道家睡眠</td>
+      <td>470</td>
+      <td>466</td>
+      <td class="text-tertiary">-4.0%</td>
+      <td class="text-tertiary">-8.1%</td>
+      <td class="text-error">-10.3%</td>
+      <td class="text-error">-18.1%</td>
+      <td class="text-error">-89.8%</td>
+    </tr>
+    <tr>
+      <td>风光摄影</td>
+      <td>1530</td>
+      <td>439</td>
+      <td class="text-secondary">+6.5%</td>
+      <td class="text-secondary">+9.6%</td>
+      <td class="text-secondary">+14.1%</td>
+      <td class="text-secondary">+23.6%</td>
+      <td class="text-error">-48.8%</td>
+    </tr>
+    <tr>
+      <td>短视频-李扬</td>
+      <td>251</td>
+      <td>384</td>
+      <td class="text-secondary">+0.2%</td>
+      <td class="text-secondary">+12.1%</td>
+      <td class="text-secondary">+1.1%</td>
+      <td class="text-tertiary">-2.0%</td>
+      <td class="text-error">-99.6%</td>
+    </tr>
+    <tr>
+      <td>普拉提</td>
+      <td>612</td>
+      <td>326</td>
+      <td class="text-secondary">+7.3%</td>
+      <td class="text-secondary">+13.2%</td>
+      <td class="text-secondary">+7.2%</td>
+      <td class="text-secondary">+8.8%</td>
+      <td class="text-error">-88.2%</td>
+    </tr>
+    <tr>
+      <td>逆龄女神瑜伽</td>
+      <td>424</td>
+      <td>304</td>
+      <td class="text-secondary">+9.5%</td>
+      <td class="text-secondary">+6.0%</td>
+      <td class="text-secondary">+5.4%</td>
+      <td class="text-secondary">+8.4%</td>
+      <td class="text-error">-84.8%</td>
+    </tr>
+    <tr>
+      <td>唱歌【燃老师】</td>
+      <td>366</td>
+      <td>303</td>
+      <td class="text-secondary">+2.3%</td>
+      <td class="text-secondary">+3.1%</td>
+      <td class="text-secondary">+16.8%</td>
+      <td class="text-tertiary">-5.7%</td>
+      <td class="text-error">-78.7%</td>
+    </tr>
+    <tr>
+      <td>君合太极</td>
+      <td>893</td>
+      <td>277</td>
+      <td class="text-secondary">+0.1%</td>
+      <td class="text-tertiary">-6.5%</td>
+      <td class="text-error">-11.0%</td>
+      <td class="text-error">-15.1%</td>
+      <td class="text-error">-93.9%</td>
+    </tr>
+    <tr>
+      <td>古法居家养生</td>
+      <td>416</td>
+      <td>265</td>
+      <td class="text-tertiary">-9.3%</td>
+      <td class="text-error">-11.4%</td>
+      <td class="text-error">-14.2%</td>
+      <td class="text-error">-46.7%</td>
+      <td class="text-error">-89.8%</td>
+    </tr>
+    <tr>
+      <td>健康食养</td>
+      <td>844</td>
+      <td>258</td>
+      <td class="text-secondary">+4.3%</td>
+      <td class="text-tertiary">-9.1%</td>
+      <td class="text-tertiary">-1.3%</td>
+      <td class="text-error">-12.5%</td>
+      <td class="text-error">-81.6%</td>
+    </tr>
+    <tr>
+      <td>健康营养</td>
+      <td>530</td>
+      <td>119</td>
+      <td class="text-secondary">+3.2%</td>
+      <td class="text-secondary">+0.9%</td>
+      <td class="text-tertiary">-3.4%</td>
+      <td class="text-error">-11.6%</td>
+      <td class="text-error">-54.1%</td>
+    </tr>
+    <tr>
+      <td>五禽戏</td>
+      <td>331</td>
+      <td>91</td>
+      <td class="text-tertiary">-1.4%</td>
+      <td class="text-secondary">+6.4%</td>
+      <td class="text-tertiary">-6.2%</td>
+      <td class="text-error">-15.0%</td>
+      <td class="text-error">-100.0%</td>
+    </tr>
+    <tr>
+      <td>中医瑜伽-陈浙南</td>
+      <td>229</td>
+      <td>35</td>
+      <td class="text-secondary">+9.0%</td>
+      <td class="text-secondary">+4.3%</td>
+      <td class="text-secondary">+6.6%</td>
+      <td class="text-secondary">+11.0%</td>
+      <td class="text-error">-84.0%</td>
+    </tr>
+    <tr>
+      <td>相机摄影</td>
+      <td>300</td>
+      <td>10</td>
+      <td class="text-tertiary">-9.8%</td>
+      <td class="text-error">-26.5%</td>
+      <td class="text-error">-20.7%</td>
+      <td class="text-error">-31.0%</td>
+      <td class="text-secondary">+17.4%</td>
+    </tr>
+    <tr>
+      <td>气血【扶阳】</td>
+      <td>265</td>
+      <td>4</td>
+      <td class="text-secondary">+4.1%</td>
+      <td class="text-secondary">+18.3%</td>
+      <td class="text-secondary">+5.7%</td>
+      <td class="text-secondary">+19.7%</td>
+      <td class="text-secondary">+72.3%</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>孵化品后链路（5月 vs 4月）</h2>
+<table>
+  <thead>
+    <tr>
+      <th background-color="light-gray">品类</th>
+      <th background-color="light-gray">4月线索</th>
+      <th background-color="light-gray">5月线索</th>
+      <th background-color="light-gray">好友率环比</th>
+      <th background-color="light-gray">进群率环比</th>
+      <th background-color="light-gray">到课率环比</th>
+      <th background-color="light-gray">完课率环比</th>
+      <th background-color="light-gray">转化率环比</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>一杰瑜伽</td>
+      <td>903</td>
+      <td>175</td>
+      <td class="text-secondary">+7.6%</td>
+      <td class="text-secondary">+6.3%</td>
+      <td class="text-secondary">+5.6%</td>
+      <td class="text-secondary">+8.3%</td>
+      <td class="text-secondary">+11.3%</td>
+    </tr>
+    <tr>
+      <td>电子琴</td>
+      <td>69</td>
+      <td>26</td>
+      <td class="text-secondary">+2.4%</td>
+      <td class="text-secondary">+4.3%</td>
+      <td class="text-secondary">+8.3%</td>
+      <td class="text-secondary">+12.1%</td>
+      <td class="text-error">-20.7%</td>
+    </tr>
+    <tr>
+      <td>美学收纳</td>
+      <td>80</td>
+      <td>23</td>
+      <td class="text-tertiary">-3.7%</td>
+      <td class="text-tertiary">-1.4%</td>
+      <td class="text-tertiary">-1.6%</td>
+      <td class="text-error">-13.0%</td>
+      <td class="text-error">-92.9%</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr/>
+
+<h1>六、下一步迭代策略</h1>
+
+<h2>核心行动</h2>
+<checkbox done="false">追回假期缺口：评估加场/加大宣发追回约1,172条线索</checkbox>
+<checkbox done="false">高价值用户召回：V7-V10占比降至12.3%，建议老岛主专属直播或社群专属场次</checkbox>
+<checkbox done="false">头部品类复播：气血、中医瑜伽等LTV&gt;150品类尽快恢复排期</checkbox>
+
+<h2>下月启示（6月110万目标）</h2>
+<callout emoji="⚠️" background-color="light-yellow" border-color="yellow">
+  <p>6月目标流水 110 万，较5月（90万）上调 22.2%。当前线索预估完成率 63.0%，若趋势延续缺口将进一步扩大。</p>
+</callout>
+<ul>
+  <li><span text-color="red">🔴 品类断层：</span>气血、中医瑜伽等LTV&gt;150品类若持续低排期，6月流水目标难以达成</li>
+  <li><span text-color="yellow">🟡 用户结构：</span>新用户占比过高（59.9%）将拉低整体LTV，需平衡拉新与召回</li>
+  <li><span text-color="yellow">🟡 季节性：</span>6月中下旬暑期，健康线品类可能受出行影响</li>
+</ul>
+
+<hr/>
+<p><em>本报告由直播间线索归因智能体自动生成 | 口径：线索数（条） | 预估流水按预测LTV¥76.74计算</em></p>
